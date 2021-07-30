@@ -15,8 +15,15 @@ class RawMaterialForm(forms.ModelForm):
 	item = forms.CharField()
 	quantity = forms.IntegerField()
 	unit_price = forms.IntegerField()
-	amount = forms.IntegerField()
-    # year = forms.ChoiceField(choices=year_choices)
+	# i  cannot edit this stuff from right here so all amounts will shown in the retrieve view
+	# amount = forms.IntegerField()
+	transport = forms.IntegerField()
+	onloading = forms.IntegerField()
+	offloading = forms.IntegerField()
+	grinding = forms.IntegerField()
+	# i  cannot edit this stuff from right here so all amounts will shown in the retrieve view
+	# fullamount = forms.IntegerField()
+   
 
 
 	# create meta class
@@ -24,11 +31,7 @@ class RawMaterialForm(forms.ModelForm):
 		# specify model to be used
 		model = RawMaterial
 
-		# specify fields to be used
-		# YEARS= [x for x in range(2020,2025)]
-  		# date = forms.DateField(label='Date', widget=forms.SelectDateWidget(years=YEARS),initial=timezone.now())
-
-
+		# exclude = ["amount","fullamount",]
 		fields = [
 			
 			"date",
@@ -37,5 +40,8 @@ class RawMaterialForm(forms.ModelForm):
 			"item",
 			"quantity",
 			"unit_price", 
-			"amount",
+			"transport",
+			"onloading",
+			"offloading",
+			"grinding",
 		]

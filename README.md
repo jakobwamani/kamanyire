@@ -43,6 +43,15 @@ from .models import RawMaterial
 
 admin.site.register(RawMaterial)
 ```
+# Create a form
+The forms.py file is to be located in the applications' directory
+
+# Create a view in views.py
+
+# Create a templates
+
+# Retriview view
+
 References
 DJANGO CRUD
 https://www.geeksforgeeks.org/django-crud-create-retrieve-update-delete-function-based-views/
@@ -53,6 +62,8 @@ http://www.umsl.edu/~sauterv/analysis/dfd/dfd_intro.html
 Setup Django Project
 https://docs.djangoproject.com/en/3.2/intro/tutorial01/
 
+str-returned-non-string-type-tuple
+https://stackoverflow.com/questions/39883950/str-returned-non-string-type-tuple
 # Contributors 
 
 Lutaro Ronnie 
