@@ -9,12 +9,33 @@
 	<!-- Security token  Make sure you put this immediately after the form tag-->
 	{% csrf_token %}
 	<p>Supply</p>
-	
+			
+    <!-- 
+    <label>Date</label>
+    <input name="date" type="date" ><br/><br/>
+    <label>Receipt Number</label>
+    <input name="receipt_number"><br/><br/>
+    <label>Supplier</label>
+    <input name="supplier" type="text"><br/><br/>
+    <label>Item</label>
+    <input name="item" type="text"><br/><br/>
+   	<label>Quantity</label>
+    <input name="quantity" type="number"><br/><br/>
+	<label>Unit Price</label>
+    <input name="unit_price" type="number"><br/><br/>
+	<label>Transport</label>
+    <input name="transport" type="number"><br/><br/>
+	<label>Onloading</label>
+    <input name="onloading" type="number"><br/><br/>
+	<label>Offloading</label>
+    <input name="offloading" type="number"><br/><br/>
+	<label>Grinding</label>
+    <input name="grinding" type="number"><br/><br/> -->
 
-	<!-- Using the formset -->
-	{{ form.as_p }}
+     <!-- Using the formset -->
+    {{ form.as_p }}
 	
-	<input type="submit" value="Submit">
+	<input type="submit" value="Submit"> 
 </form>
 </body>
 </html>

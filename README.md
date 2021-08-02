@@ -64,6 +64,9 @@ https://docs.djangoproject.com/en/3.2/intro/tutorial01/
 
 str-returned-non-string-type-tuple
 https://stackoverflow.com/questions/39883950/str-returned-non-string-type-tuple
+
+How to create custom template tags
+https://docs.djangoproject.com/en/3.2/howto/custom-template-tags/
 # Contributors 
 
 Lutaro Ronnie 

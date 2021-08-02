@@ -33,23 +33,46 @@ def create_supply(request):
 		# i have decided to leave out amount and full amount from the database because , i have failed to derive
 		# and enter them in the form at once
 
-
-
 		# print(supplier)
 		form.save()
 		
 	context['form']= form
-	return render(request, "supply.html", context)
+
+	# July 31 2021
+	
+	#i get to grab these values 
+	# date = request.GET.get('date')
+	# receipt_number = request.GET.get('receipt_number')
+	# supplier = request.GET.get('supplier')
+	# item = request.GET.get('item')
+	# quantity = request.GET.get('quantity')
+	# unit_price = request.GET.get('unit_price')
+	# transport = request.GET.get('transport')
+	# onloading = request.GET.get('onloading')
+	# offloading = request.GET.get('offloading')
+	# grinding = request.GET.get('grinding')
+
+	#working on amounts......
+	# amount = quantity*unit_price
+	# fullamount = amount+transport+onloading+offloading+grinding
+	# #create an object to send them to the table
+	# b = RawMaterial(date=date, receipt_number=receipt_number, supplier=supplier, item=item, quantity=quantity,
+	# 	unit_price=unit_price, amount=amount , transport=transport, onloading=onloading, offloading=offloading, grinding=grinding, fullamount=fullamount)
+	# b.save()
+	# print(type(quantity))
+
+	return render(request, "supply.html",context)
 
 def view_supply(request):
-    # dictionary for initial data with
-    # field names as keys
-    context = {}
- 
-    # add the dictionary during initialization
-   
-    supply_list = RawMaterial.objects.all()
+   	#get the date from the user 
+	start_date = request.GET.get('start_date')
+	end_date = request.GET.get('end_date')
 
-    context_dict = {'supply_list' : supply_list}
+	# run a query to get all the supplies on that date
+	supplies = RawMaterial.objects.filter(date__range=[start_date, end_date])
+
+	
      
-    return render(request, "view_supply.html", context_dict)
+	# return render(request, "view_supply.html", context)
+	return render(request, "view_supply.html", {'supplies':supplies})
+

@@ -1,19 +1,71 @@
+
 <!DOCTYPE html>
 <html>
+<!--This is used to load the different manipulation of data that i what and how , i want it to be shown on the screen-->
+{% load supply_extras %}
 <head>
 	<meta charset="utf-8">
 	<title>Supplies</title>
 </head>
 <body>
 <div class="main">
+	<form action="{% url 'view_supplies' %}" method="get">
+                <!-- <label>Childid</label>
+                <input name="child" type="text" required placeholder="Childid..."><br/><br/> -->
+                <label>From</label>
+                <input name="start_date" type="date" ><br/><br/>
+                <labe>To</labe>
+                <input name="end_date" type="date" ><br/><br/>
+                <input type="submit" name="submit" value="Search"/>                
+    </form>
 
-	{% for data in dataset %}.
+     <table style="width: auto;">
+                    <ul>
+                    
+                    <tr>
+                        <th>Supply Id</th>
+                        <th>Date</th>
+                        <th>Receipt Number</th>
+                        <th>Supplier</th>
+                        <th>Item</th>
+                        <th>Quantity</th>
+                        <th>Unit_Price</th>
+                        <th>Amount</th>
+                        <th>Transport</th>
+                        <th>Onloading</th>
+                        <th>Offloading</th>
+                        <th>Grinding</th>
+                        <th>Full Amount</th>
+                       
+                    </tr>
+                    {% for supply in supplies %}
+                    <tr>
+                        <td>{{ supply.id}} </td>
+                        <td>{{ supply.date}} </td>
+                        <td>{{ supply.receipt_number }}</td>
+                        <td>{{ supply.supplier }}</td>
+                        <td>{{ supply.item }}</td>
+                        <td>{{ supply.quantity }}</td>
+                        <td>{{ supply.unit_price }}</td>
+                        
+                        <td>{{ amount|work_on_amount:supply }} </td>
+                        
+                        <td>{{ supply.transport}} </td>
+                        <td>{{ supply.onloading}} </td>
+                        <td>{{ supply.offloading }} </td>
+                        <td>{{ supply.grinding }} </td>
+                        <td>{{ fullamount|work_on_the_full_amount:supply }} </td>
 
-	{{ data.title }}<br/>
-	{{ data.description }}<br/>
-	<hr/>
+                        <!-- <td><a href="/twinkle/update_show_payment_history/?id={{ pay.id }}">Update</a></td>
+                        <td><a href="/twinkle/delete_show_payment_history/?id={{ pay.id }}">Delete</a></td> -->
+                    </tr>
+                    {% endfor %}
+                
+                </table>
+    
 
-	{% endfor %}
+
+
 
 </div>
 </body>
