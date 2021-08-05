@@ -6,6 +6,12 @@
 <head>
 	<meta charset="utf-8">
 	<title>Supplies</title>
+    <style type="text/css">
+        td, th {
+    border: 1px solid #ccc;
+    /* border-width border-style border-color */
+}
+    </style>
 </head>
 <body>
 <div class="main">
@@ -35,7 +41,11 @@
                         <th>Onloading</th>
                         <th>Offloading</th>
                         <th>Grinding</th>
-                        <th>Full Amount</th>
+                        <th>Cost of Supply</th>
+                        <th>Pricing</th>
+                        <th>Update</th>
+
+
                        
                     </tr>
                     {% for supply in supplies %}
@@ -54,10 +64,10 @@
                         <td>{{ supply.onloading}} </td>
                         <td>{{ supply.offloading }} </td>
                         <td>{{ supply.grinding }} </td>
-                        <td>{{ fullamount|work_on_the_full_amount:supply }} </td>
+                        <td>{{ cost_of_supply|work_on_the_full_amount:supply }} </td>
+                        <td>{{ supply.pricing }} </td>
+                        <td><a href="update_supply/?id={{ supply.id }}">Update</a></td>
 
-                        <!-- <td><a href="/twinkle/update_show_payment_history/?id={{ pay.id }}">Update</a></td>
-                        <td><a href="/twinkle/delete_show_payment_history/?id={{ pay.id }}">Delete</a></td> -->
                     </tr>
                     {% endfor %}
                 

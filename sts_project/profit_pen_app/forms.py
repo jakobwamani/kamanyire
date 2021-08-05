@@ -23,6 +23,7 @@ class RawMaterialForm(forms.ModelForm):
 	grinding = forms.IntegerField()
 	# i  cannot edit this stuff from right here so all amounts will shown in the retrieve view
 	# fullamount = forms.IntegerField()
+	# pricing = forms.IntegerField(help_text='First check to cost of supply to update this')
    
 
 

@@ -51,6 +51,8 @@ The forms.py file is to be located in the applications' directory
 # Create a templates
 
 # Retriview view
+But to retriev the view in the way that i wanted i had to used some template tags
+
 
 References
 DJANGO CRUD

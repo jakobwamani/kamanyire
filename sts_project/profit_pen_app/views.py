@@ -2,6 +2,8 @@ from django.shortcuts import render
 from profit_pen_app.models import RawMaterial
 from profit_pen_app.forms  import RawMaterialForm
 from django.http import HttpResponse
+from django.shortcuts import redirect
+
 
 def index(request):
     return HttpResponse("Hello, world. Welcome to the profitpen system.")
@@ -63,7 +65,7 @@ def create_supply(request):
 
 	return render(request, "supply.html",context)
 
-def view_supply(request):
+def viewing_supply(request):
    	#get the date from the user 
 	start_date = request.GET.get('start_date')
 	end_date = request.GET.get('end_date')
@@ -75,4 +77,29 @@ def view_supply(request):
      
 	# return render(request, "view_supply.html", context)
 	return render(request, "view_supply.html", {'supplies':supplies})
+
+
+def updating_supply(request):
+	context_dict = {}
+
+	if 'id' in request.GET:
+		pk = request.GET['id']
+
+		print (pk)
+		clean_pk = pk.strip("/")
+		print (clean_pk)
+		supply_record = RawMaterial.objects.get(id=clean_pk)
+		form = RawMaterialForm(request.POST or None, instance=supply_record)
+    
+		if form.is_valid():
+			pricing = form.cleaned_data.get("pricing")
+			print(pricing)
+			
+			form.save()
+
+			# redirect('view_supply.html')
+
+		context_dict["form"] = form
+	return render(request,"update_supply.html",context=context_dict)
+
 
