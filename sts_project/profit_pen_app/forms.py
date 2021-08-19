@@ -1,5 +1,5 @@
 from django import forms
-from .models import RawMaterial
+from .models import RawMaterial , Product
 from django.utils import timezone
 
 
@@ -25,8 +25,6 @@ class RawMaterialForm(forms.ModelForm):
 	# fullamount = forms.IntegerField()
 	# pricing = forms.IntegerField(help_text='First check to cost of supply to update this')
    
-
-
 	# create meta class
 	class Meta:
 		# specify model to be used
@@ -38,11 +36,25 @@ class RawMaterialForm(forms.ModelForm):
 			"date",
 			"receipt_number",
 			"supplier",
-			"item",
-			"quantity",
-			"unit_price", 
-			"transport",
-			"onloading",
-			"offloading",
-			"grinding",
+			"item","quantity","unit_price", "transport","onloading","offloading","grinding",
 		]
+
+
+class ProductForm(forms.ModelForm):
+	YEARS= [x for x in range(2000,2030)]
+	date = forms.DateField(label='Date', widget=forms.SelectDateWidget(years=YEARS),initial=timezone.now())
+	# date = forms.DateField()
+	product = forms.CharField()
+	maize_bran = forms.IntegerField()
+	cotton = forms.IntegerField()
+	sun_flower = forms.IntegerField()
+	salt = forms.IntegerField()
+	layers_premix = forms.IntegerField()
+	shells = forms.IntegerField()
+	maize_boaster = forms.IntegerField()
+	egg_boaster = forms.IntegerField()
+
+	class Meta:
+		model = Product
+
+		fields = ["date","product","maize_bran","cotton","sun_flower","salt","layers_premix","shells","maize_boaster","egg_boaster"]

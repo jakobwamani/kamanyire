@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+
+
+<html>
+    <head>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+    body {
+        font-style: initial;
+        font-family:Cursive;
+    }
+    td, th {
+    border: 1px solid #ccc;
+    /* border-width border-style border-color */
+}
+
+    
+    </style> 
+
+        <title>
+            {% block title_block %}
+                Profit Pen System
+            {% endblock %}
+        </title>              
+    </head>
+    {% block body_block %}
+    <body>
+        <div>
+            
+        </div>
+        <hr/>
+      
+    </body>
+    {% endblock %}
+      <div>
+            <a href="{% url 'get_supply' %}"><p>Get supplies</p></a><br/>
+            <a href="{% url 'view_supplies' %}"><p>View supplies</p></a><br/>
+            <a href="{% url 'create_products' %}"><p>Create_product</p></a><br/>
+
+            
+        </div>
+</html>
+    
+

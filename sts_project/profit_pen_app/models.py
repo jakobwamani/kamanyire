@@ -30,3 +30,20 @@ class RawMaterial(models.Model):
 		   
 		return '{} {} {} {} {}'.format(self.date,self.supplier,self.item,self.unit_price,self.amount)
 
+class Product(models.Model):
+	date = models.DateField()
+	product = models.CharField(max_length = 100)
+	maize_bran = models.IntegerField(default=0)
+	cotton = models.IntegerField(default=0)
+	sun_flower = models.IntegerField(default=0)
+	salt = models.IntegerField(default=0)
+	layers_premix = models.IntegerField(default=0)
+	shells = models.IntegerField(default=0)
+	maize_boaster = models.IntegerField(default=0)
+	egg_boaster = models.IntegerField(default=0)
+
+	def __str__(self):
+		return '{}'.format(self.product)
+
+
+

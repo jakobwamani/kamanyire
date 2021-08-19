@@ -1,0 +1,23 @@
+
+{% extends 'base.html' %}
+{% load supply_extras %}
+{% block title_block %}
+Delete supply
+{% endblock %}
+
+{% block body_block %}
+
+<body>
+    <h1>Delete a Supply</h1>
+    <form>
+        <h1> Delete child</h1>
+        <form method="post">{% csrf_token %}
+            Are you sure you want to delete "{{ object }}" ?
+            <input type="submit" value="Submit" />
+        </form>
+        </div> 
+    </form>
+{% endblock %}
+            
+        
+

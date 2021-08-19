@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load supply_extras %}
+{% block title_block %}
+Mix product
+{% endblock %}
+
+{% block body_block %}
+<form method="POST" enctype="multipart/form-data">
+	<!-- Security token  Make sure you put this immediately after the form tag-->
+	{% csrf_token %}
+	<p>Mixing</p>
+			
+
+     <!-- Using the formset -->
+    {{ form.as_p }}
+	
+	<input type="submit" value="Mix"> 
+</form>
+{% endblock %}
+
+

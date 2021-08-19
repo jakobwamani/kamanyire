@@ -53,7 +53,8 @@ The forms.py file is to be located in the applications' directory
 # Retriview view
 But to retriev the view in the way that i wanted i had to used some template tags
 
-
+# CRUD mixtures
+Now its from mixtures that we get products
 References
 DJANGO CRUD
 https://www.geeksforgeeks.org/django-crud-create-retrieve-update-delete-function-based-views/

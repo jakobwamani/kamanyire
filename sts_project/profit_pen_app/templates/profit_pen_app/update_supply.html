@@ -1,11 +1,13 @@
+
+{% extends 'base.html' %}
+{% load supply_extras %}
+{% block title_block %}
+Update supply
+{% endblock %}
+
+{% block body_block %}
 <!DOCTYPE html>
-<!DOCTYPE html>
-<html>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<head>
-	<meta charset="utf-8">
-	<title>Update supply</title>
-</head>
+
 <body>
 	<h1>Update the supply</h1>
  <form method="POST"> 
@@ -19,4 +21,4 @@
             </form> 
 
 </body>
-</html>
+{% endblock %}
