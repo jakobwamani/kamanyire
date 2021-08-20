@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from profit_pen_app.models import RawMaterial
+from profit_pen_app.models import RawMaterial,Product
 from profit_pen_app.forms  import RawMaterialForm ,ProductForm
 from django.http import HttpResponse
 from django.shortcuts import redirect
@@ -84,3 +84,15 @@ def create_product(request):
 	context['form'] = form
 
 	return render(request,"product.html",context)
+
+def viewing_product(request):
+   	#get the date from the user 
+	start_date = request.GET.get('start_date')
+	end_date = request.GET.get('end_date')
+
+	# run a query to get all the supplies on that date
+	products = Product.objects.filter(date__range=[start_date, end_date])
+
+	print(type(products))
+     
+	return render(request, "view_product.html", {'products':products}) 

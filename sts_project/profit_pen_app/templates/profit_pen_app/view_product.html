@@ -1,0 +1,72 @@
+
+{% extends 'base.html' %}
+{% load supply_extras %}
+{% block title_block %}
+View Products
+{% endblock %}
+
+{% block body_block %}
+<h1>View Product</h1>
+    <form action="{% url 'view_products' %}" method="get">
+                <!-- <label>Childid</label>
+                <input name="child" type="text" required placeholder="Childid..."><br/><br/> -->
+                <label>From</label>
+                <input name="start_date" type="date" ><br/><br/>
+                <labe>To</labe>
+                <input name="end_date" type="date" ><br/><br/>
+                <input type="submit" name="submit" value="Search"/>                
+    </form>
+
+     <table style="border:1px">
+                    <ul>
+    
+                    <tr>
+                        <th>Product Id</th>
+                        <th>Date</th>
+                        <th>Product</th>
+                        <th>Maize_bran</th>
+                        <th>Cotton</th>
+                        <th>Sun_flower</th>
+                        <th>Salt</th>
+                        <th>Layers_premix</th>
+                        <th>Shells</th>
+                        <th>Maize_boaster</th>
+                        <th>Egg_boaster</th>
+                        <th>Total</th>
+                        <!-- <th>Cost of Supply</th>
+                        <th>Pricing</th>
+                        <th>Update</th>
+                        <th>Delete</th>
+ -->
+                       
+                    </tr>
+                    {% for product in products %}
+                    <tr>
+                        <td>{{ product.id}} </td>
+                        <td>{{ product.date}} </td>
+                        <td>{{ product.product }}</td>
+                        <td>{{ product.maize_bran }}</td>
+                        <td>{{ product.cotton }}</td>
+                        <td>{{ product.sun_flower }}</td>
+                        <td>{{ product.salt }}</td>
+<!--                         <td>{{ amount|work_on_amount:supply }} </td>
+ -->                        
+                        <td>{{ product.layers_premix }} </td>
+                        <td>{{ product.shells }} </td>
+                        <td>{{ product.maize_boaster }} </td>
+                        <td>{{ product.egg_boaster }} </td>
+<!--                         <td>{{ cost_of_supply|work_on_the_full_amount:supply }} </td>
+ -->                        <!-- <td>{{ supply.pricing }} </td> -->
+                        <td><a href="update_supply/?id={{ product.id }}">Update</a></td>
+                        <td><a href="delete_supply/?id={{ product.id }}">Delete</a></td>
+
+                    </tr>
+                    {% endfor %}
+                
+                </table>
+       
+{% endblock %}
+
+
+
+
