@@ -37,7 +37,6 @@ def viewing_supply(request):
 	# return render(request, "view_supply.html", context)
 	return render(request, "view_supply.html", {'supplies':supplies})
 
-
 def updating_supply(request):
 	context_dict = {}
 
@@ -58,7 +57,6 @@ def updating_supply(request):
 
 		context_dict["form"] = form
 	return render(request,"update_supply.html",context=context_dict)
-
 
 def delete_supply(request):
     # book= get_object_or_404(Book, pk=pk)  
@@ -96,3 +94,25 @@ def viewing_product(request):
 	print(type(products))
      
 	return render(request, "view_product.html", {'products':products}) 
+
+def updating_product(request):
+	context_dict = {}
+
+	if 'id' in request.GET:
+		pk = request.GET['id']
+
+		print (pk)
+		clean_pk = pk.strip("/")
+		print (clean_pk)
+		product_record = Product.objects.get(id=clean_pk)
+		form = ProductForm(request.POST or None, instance=product_record)
+    
+		if form.is_valid():
+			
+			form.save()
+
+			redirect('view_product.html')
+
+		context_dict["form"] = form
+
+	return render(request,"update_product.html",context=context_dict)

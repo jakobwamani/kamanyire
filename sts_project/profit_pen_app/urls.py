@@ -11,7 +11,8 @@ urlpatterns = [
     path('update_supply/',views.updating_supply , name = 'update_supplies'),
     path('delete_supply/',views.delete_supply , name = 'delete_supplies'),
     path('create_product/',views.create_product , name = 'create_products'),
-    path('view_product/',views.viewing_product , name = 'view_products')
+    path('view_product/',views.viewing_product , name = 'view_products'),
+    path('update_product/',views.updating_product , name = 'update_products')
 
 
 

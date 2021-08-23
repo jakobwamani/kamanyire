@@ -1,4 +1,3 @@
-
 {% extends 'base.html' %}
 
 {% block title_block %}
@@ -48,15 +47,14 @@ View Products
                         <td>{{ product.maize_bran }}</td>
                         <td>{{ product.cotton }}</td>
                         <td>{{ product.sun_flower }}</td>
-                        <td>{{ product.salt }}</td>
-<!--                         
- -->                        
+                        <td>{{ product.salt }}</td>                      
                         <td>{{ product.layers_premix }} </td>
                         <td>{{ product.shells }} </td>
                         <td>{{ product.maize_boaster }} </td>
                         <td>{{ product.egg_boaster }} </td>
-                 <td><a href="update_supply/?id={{ product.id }}">Update</a></td>
-                        <td><a href="delete_supply/?id={{ product.id }}">Delete</a></td>
+                        <!--I dnot know why i had to back reference it , it just couldn't work with it -->
+                        <td><a href="../update_product/?id={{ product.id }}">Update</a></td>
+                        <td><a href="delete_product/?id={{ product.id }}">Delete</a></td>
 
                     </tr>
                     {% endfor %}
