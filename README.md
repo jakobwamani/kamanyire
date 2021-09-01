@@ -60,6 +60,8 @@ create the products model
 
 # github account token
 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
+
+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
 References
 DJANGO CRUD
 https://www.geeksforgeeks.org/django-crud-create-retrieve-update-delete-function-based-views/
@@ -75,6 +77,9 @@ https://stackoverflow.com/questions/39883950/str-returned-non-string-type-tuple
 
 How to create custom template tags
 https://docs.djangoproject.com/en/3.2/howto/custom-template-tags/
+
+How to retrieve data from a django form 
+http://www.learningaboutelectronics.com/Articles/How-to-retrieve-data-from-a-Django-form-Python.php
 # Contributors 
 
 Lutaro Ronnie 

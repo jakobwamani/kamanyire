@@ -16,7 +16,9 @@ def create_supply(request):
 	# add the dictionary during initialization
 	form = RawMaterialForm(request.POST or None)
 	if form.is_valid():
-
+		#Grab the data from the form
+		#Subtract it from the data in the raw materials
+		#then save the form.
 		form.save()
 		
 	context['form']= form
@@ -78,6 +80,7 @@ def create_product(request):
 	context = {}
 	form = ProductForm(request.POST or None)
 	if form.is_valid():
+		#so its from here that we shall pull of that stuff
 		form.save()
 	context['form'] = form
 
@@ -116,3 +119,19 @@ def updating_product(request):
 		context_dict["form"] = form
 
 	return render(request,"update_product.html",context=context_dict)
+
+def delete_product(request):
+    # book= get_object_or_404(Book, pk=pk)  
+    context_dict = {}
+
+    if 'id' in request.GET:
+        pk = request.GET['id']
+        clean_pk = pk.strip("/")
+        cleaned_pk = int(clean_pk)
+        product_record_to_delete = Product.objects.get(id=cleaned_pk)  
+        if request.method=='POST':
+            product_record_to_delete.delete()
+            return redirect('view_product.html')
+
+        context_dict["object"] = product_record_to_delete
+    return render(request, "delete_product.html",context=context_dict)

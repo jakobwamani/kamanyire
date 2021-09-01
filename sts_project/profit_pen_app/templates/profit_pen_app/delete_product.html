@@ -1,0 +1,23 @@
+
+{% extends 'base.html' %}
+
+{% block title_block %}
+Delete Product
+{% endblock %}
+
+{% block body_block %}
+
+<body>
+    <h1>Delete a Product</h1>
+    <form>
+        <h1> Delete child</h1>
+        <form method="post">{% csrf_token %}
+            Are you sure you want to delete "{{ object }}" ?
+            <input type="submit" value="Submit" />
+        </form>
+        </div> 
+    </form>
+{% endblock %}
+            
+        
+

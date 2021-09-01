@@ -54,7 +54,7 @@ View Products
                         <td>{{ product.egg_boaster }} </td>
                         <!--I dnot know why i had to back reference it , it just couldn't work with it -->
                         <td><a href="../update_product/?id={{ product.id }}">Update</a></td>
-                        <td><a href="delete_product/?id={{ product.id }}">Delete</a></td>
+                        <td><a href="../delete_product/?id={{ product.id }}">Delete</a></td>
 
                     </tr>
                     {% endfor %}
