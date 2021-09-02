@@ -82,7 +82,25 @@ def create_product(request):
 		#Subtract it from the data in the raw materials
 		#then save the form.
 	
+		maize_bran_ingridient = form.cleaned_data['maize_bran']
+		# then pick from the supplies
+		maize_bran_supply = RawMaterial.objects.filter(item='Maize/bran')
+		# Change the result of the query into a list
+		maize_bran_supply_list = list(maize_bran_supply)
+		# Create an empty list to store the quantites 
+		maize_bran_supply_quantities = []
+		# For every item in the maize_bran_supply_list , get the quantity attribute and add it to the empty list.
+		for quantity_attribute in maize_bran_supply_list:
+			#get the value of the quantity
+			value = quantity_attribute.quantity
+			#populate the empty list
+			maize_bran_supply_quantities.append("value")
+
+		#get the sum of quantites inside the maize_bran_supply_quantities
+		sum(maize_bran_supply_quantities)
+		#try to get the remaining quantity of the rawmaterial
 		
+
     	
 		form.save()
 	context['form'] = form
