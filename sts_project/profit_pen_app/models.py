@@ -46,4 +46,20 @@ class Product(models.Model):
 		return '{}'.format(self.product)
 
 
+# maize_bran,cotton ,sun_flower ,salt ,layers_premix ,shells ,maize_boaster ,egg_boaster 
+
+class RawMaterialQuantities(models.Model):
+	date = models.DateField()
+	maize_bran = models.IntegerField(default=0)
+	cotton = models.IntegerField(default=0)
+	sun_flower = models.IntegerField(default=0)
+	salt = models.IntegerField(default=0)
+	layers_premix = models.IntegerField(default=0)
+	shells = models.IntegerField(default=0)
+	maize_boaster = models.IntegerField(default=0)
+	egg_boaster = models.IntegerField(default=0)
+
+	def __str__(self):
+		return '{}'.format(self.date)
+
 

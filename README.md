@@ -57,7 +57,23 @@ But to retriev the view in the way that i wanted i had to used some template tag
 Now its from mixtures that we get products
 ## create products
 create the products model
+September 1st 2021
+Now as the the products are being created , we get to find out that we must subtract the quantity of 
+the different ingredients that has been used but we do that by tackling one by one.
+Steps involved in a backward way
+1.We have a remaining quantity of a raw material
+But before that , we had to 
+2.Subtract the (inital quantity of the rawmaterial-the required quantity to make the product)
+but before that we had to get the required quantity ? How 
+3.```python
+maize_bran = form.cleaned_data.get("maize_bran")
+```
+4.We also have to get the initial quantity of the raw material
+Solutions
+we are looking for quantity of a specific item , however what disturbs me is that the user might have another supply intake and this present logic will only subtract from that latest intake hence ignoring other previous intakes .
 
+Hypothesis one
+Am thinking of having another table that only collects the quantities of the specific rawmaterials. Incase we get to have another supply , the supply table is populated with new  and so is the new table which i will call the supply quantities, because there is just one quantity to edit , then i won't have to worry about other quantities.
 # github account token
 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
 
