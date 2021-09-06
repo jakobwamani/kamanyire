@@ -73,11 +73,41 @@ Solutions
 we are looking for quantity of a specific item , however what disturbs me is that the user might have another supply intake and this present logic will only subtract from that latest intake hence ignoring other previous intakes .
 
 Hypothesis one
-Am thinking of having another table that only collects the quantities of the specific rawmaterials. Incase we get to have another supply , the supply table is populated with new  and so is the new table which i will call the supply quantities, because there is just one quantity to edit , then i won't have to worry about other quantities.
+Am thinking of having another table that only collects the quantities of the specific rawmaterials. Incase we get to have another supply , the supply table is populated with new  and so is the new table which i will call the supply quantities, because there is just one row to edit , then i won't have to worry about other quantities.
+
+September 2nd 2021
+Steps (backward fashion)
+We shall have a model called RawMaterial_Quantities
+what should it include ?
+maize_bran,cotton ,sun_flower ,salt ,layers_premix ,shells ,maize_boaster ,egg_boaster 
+
+And How will they be populated?
+We shall get all quantities of a particular raw material 
+
+Get all the supplies which were of a particular raw_material
+```python
+ raw_shit = RawMaterial.objects.filter(item='Maize/bran')
+```
+
+Change the result of the query into a list
+```python
+raw_shit_list = list(raw_shit)
+```
+
+Create an empty list to store the quantites .For every item in the raw_shit_list,get the quantity attribute and add it to the empty list.After that update the supply_quantities table.
+
+September 3rd 2021
+Am thinking of writing a function to do all that because , i can't do it on my own.
+
+September 6th 2021
+i have created a function to do the subtraction and then also am using some messages to indicate to the user the level of inventory remaining of a certain raw material.
 # github account token
 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
 
 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
+
+September 2nd 2021
+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
 References
 DJANGO CRUD
 https://www.geeksforgeeks.org/django-crud-create-retrieve-update-delete-function-based-views/
