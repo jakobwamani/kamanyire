@@ -8,6 +8,8 @@ class RawMaterial(models.Model):
 	date = models.DateField()
 	receipt_number = models.CharField(max_length = 100)
 	supplier = models.CharField(max_length = 100)
+	#defining the choices
+
 	item = models.CharField(max_length = 50)
 	quantity = models.IntegerField()
 	unit_price = models.IntegerField()

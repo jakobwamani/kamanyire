@@ -36,7 +36,7 @@ ALLOWED_HOSTS = ["192.168.43.1","127.0.0.1"]
 
 INSTALLED_APPS = [
     'profit_pen_app.apps.ProfitPenAppConfig',
-    'django.contrib.messages',
+    
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

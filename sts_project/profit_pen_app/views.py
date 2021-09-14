@@ -3,7 +3,8 @@ from profit_pen_app.models import RawMaterial,Product
 from profit_pen_app.forms  import RawMaterialForm ,ProductForm
 from django.http import HttpResponse
 from django.shortcuts import redirect
-from helper_functions import * 
+from profit_pen_app.helper_functions import * 
+# import helper_functions.py
 from django.contrib import messages
 
 
@@ -93,9 +94,9 @@ def create_product(request):
 		# sum(maize_bran_supply_quantities)
 		# #try to get the remaining quantity of the rawmaterial
 		#this is the function to subtract 
-		subtracting('Maize/bran')
+		subtracting('maize_bran')
 
-		remaining_maize_bran = maize_bran_ingridient - subtracting('Maize/bran')
+		remaining_maize_bran = maize_bran_ingridient - subtracting('maize_bran')
 		#if the balance is less than zero 
 		if remaining_maize_bran < 0:
 			messages.add_message(request, messages.INFO, 'Maize_bran is over')
