@@ -101,6 +101,85 @@ Am thinking of writing a function to do all that because , i can't do it on my o
 
 September 6th 2021
 i have created a function to do the subtraction and then also am using some messages to indicate to the user the level of inventory remaining of a certain raw material.
+
+# Major issue September 15th 2021
+Am running into a major issue right now, I have a raw materials table and a product table , when a product is being created , bits of the rawmaterials are used but how , 
+they are picked directly from the supply table and then put into a list but the challenge is that , i wont know which value of the rawmaterial to reduct when the product is being created .
+
+So what if i create another table that pulls all totals of the raw materials in one place not just
+record like a ledgder.
+
+so this is the plan , the result is to have a one value representing the quantity of specific rawmaterial owned by the business
+
+but before that we have all the values put in a list then into that table .
+Name of the table let it be raw_material_quantities 
+
+```python
+class RawMaterialQuantities(models.Model):
+	date = models.DateField()
+	maize_bran = models.IntegerField(default=0)
+	cotton = models.IntegerField(default=0)
+	sun_flower = models.IntegerField(default=0)
+	fish = models.IntegerField(default=0)
+	salt = models.IntegerField(default=0)
+	general_purpose_premix = models.IntegerField(default=0)
+	layers_premix = models.IntegerField(default=0)
+	shells = models.IntegerField(default=0)
+	meat_boaster = models.IntegerField(default=0)
+	egg_boaster = models.IntegerField(default=0)
+
+	def __str__(self):
+		return '{}'.format(self.date)
+```
+
+So after creating this model , that will act as a good place for us to store our quantities of different raw materials .
+Now the question is how do we get to store those quantites in there.
+## These are the different ways in which we shall innteract with this model
+#### 1.when a supply is made 
+we shall get all the quantites of a specific raw materials put them in a list 
+Sum up that list and store the sum inside the raw_material_quantites model 
+To make it also clear we can't have a date on that model.
+from then on we shall just be editing .
+Must make sure that from then one we shall be editing not like creating a new input 
+
+#### 2.when a supply is edited
+Here we will edit that one row inside that RawmaterialQuantities table  
+#### 3.when a supply is deleted
+Here again we will still edit this stuff out .
+#### 4.when a product is being made
+Here we will again edit that one row , there is nothing like creating a new row.
+#### 5.when a product is being edited 
+Just updating that one row
+#### 6.when a product is being deleted
+Just updating that one row.
+
+# September 18th 2021
+#### Creation of a supply
+So this is how we are going to do this .
+Have the model "RawMaterialQuantites" populated
+How
+Check if the "RawMaterialQuantities" table has a row , if true
+-We just add the last most quantity of a specific quantity to the quantity inside the "RawMaterialQuantites"
+if false
+-Look for the quantities of specific raw materials in the raw material model
+-Put them in a list and sumup them up and then push that quantity inside "RawMaterialQuantites"
+
+Now we are going to do this for every item so i think we are going to use a function.
+
+This code will run we are trying to create a supply.
+
+#### Edition of a supply
+So we are check if the "RawMaterialQuantities" model is populated with one row
+IF TRUE
+We look for the quantities of that specific raw material in the "raw material" model
+Put them in a list and sum them up and change that quantity value in the "RawMaterialQuantities" model
+
+IF FALSE
+the "RawMaterialQuantities" can't be empty
+
+#### Creation of a product 
+
+We are doing all of this inorder to have one table of truth.
 # github account token
 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
 
@@ -108,6 +187,9 @@ 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
 
 September 2nd 2021
 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
+
+September 15th 2021
+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
 References
 DJANGO CRUD
 https://www.geeksforgeeks.org/django-crud-create-retrieve-update-delete-function-based-views/

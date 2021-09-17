@@ -100,6 +100,8 @@ def create_product(request):
 		#if the balance is less than zero 
 		if remaining_maize_bran < 0:
 			messages.add_message(request, messages.INFO, 'Maize_bran is over')
+		else:
+			messages.add_message(request, messages.INFO, "Remaining_maize_bran " + str(remaining_maize_bran) + "kilograms")
 		
 		#subtracting('Maize/bran')
 
