@@ -1,4 +1,4 @@
-from .models import RawMaterial , Product
+from .models import RawMaterial , Product , RawMaterialQuantities
 
 def subtracting(raw_material):
    #maize_bran_ingridient = form.cleaned_data['maize_bran']
@@ -15,4 +15,6 @@ def subtracting(raw_material):
       maize_bran_supply_quantities.append(value)
       #get the sum of quantites inside the maize_bran_supply_quantities
    return sum(maize_bran_supply_quantities)
+
+
  

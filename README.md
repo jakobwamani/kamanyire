@@ -165,7 +165,6 @@ if false
 -Put them in a list and sumup them up and then push that quantity inside "RawMaterialQuantites"
 
 Now we are going to do this for every item so i think we are going to use a function.
-
 This code will run we are trying to create a supply.
 
 #### Edition of a supply
@@ -177,10 +176,36 @@ Put them in a list and sum them up and change that quantity value in the "RawMat
 IF FALSE
 the "RawMaterialQuantities" can't be empty
 
+#### Deletion of a supply
+So we check if the "RawMaterialQuantities" model is populated with one row 
+IF TRUE
+We look for that specific raw material in the raw material table , delete it 
+then again we look for the quantites of that specific raw material in the "raw material table"
+Put them in a list and then sum them up and change that quantity value in the "RawMaterialQuantites"
+
 #### Creation of a product 
+# September 20th 2021
+i found out that , i lost the documentation of the whole project so , i should draw again  
 
+So we check and see if the "RawMaterialQuantities" model is populated with one row.
 
+IF TRUE
+We reduce a specific quantity in the "RawMaterialQuantities" model and update it 
+
+IF FALSE
+the "RawMaterialQuantities" can't be empty
+
+#### Edition of a product
+So we make a change of a specific raw_material in the "product" model 
+and againg make that change inside the "RawMaterialQuantities" model
 We are doing all of this inorder to have one table of truth.
+
+#### Deletion of a product 
+So we get to know the different raw_materials in a specific product 
+Then we subtract each of them from the RawMaterialQuantites table
+and then we update the RawMaterialQuantities
+
+
 # github account token
 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
 
