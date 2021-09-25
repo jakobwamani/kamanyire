@@ -159,6 +159,8 @@ So this is how we are going to do this .
 Have the model "RawMaterialQuantites" populated
 How
 Check if the "RawMaterialQuantities" table has a row , if true
+-We must make sure the "RawMaterialQuantities" table has initial values of zeros such that we can 
+update it (i had to do this manually)
 -We just add the last most quantity of a specific quantity to the quantity inside the "RawMaterialQuantites"
 if false
 -Look for the quantities of specific raw materials in the raw material model
@@ -216,6 +218,9 @@ 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
 
 September 15th 2021
 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
+
+September 22th 2021
+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
 References
 DJANGO CRUD
 https://www.geeksforgeeks.org/django-crud-create-retrieve-update-delete-function-based-views/
