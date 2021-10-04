@@ -9,7 +9,6 @@ class RawMaterial(models.Model):
 	receipt_number = models.CharField(max_length = 100)
 	supplier = models.CharField(max_length = 100)
 	#defining the choices
-
 	item = models.CharField(max_length = 50)
 	quantity = models.IntegerField()
 	unit_price = models.IntegerField()
@@ -24,13 +23,11 @@ class RawMaterial(models.Model):
 	#immediately , that's above my paygrade
 	cost_of_supply = models.IntegerField(default=0)
 	pricing = models.IntegerField(default=0)
-
-
 	# renames the instances of the model
 	# with their title name
 	def __str__(self):
 		   
-		return '{} {} {} {} {}'.format(self.date,self.supplier,self.item,self.unit_price,self.amount)
+		return '{} {} {} {} '.format(self.supplier,self.item,self.unit_price,self.quantity)
 
 class Product(models.Model):
 	date = models.DateField()
@@ -43,13 +40,13 @@ class Product(models.Model):
 	shells = models.IntegerField(default=0)
 	maize_boaster = models.IntegerField(default=0)
 	egg_boaster = models.IntegerField(default=0)
-
 	def __str__(self):
 		return '{}'.format(self.product)
 
 
 
 class RawMaterialQuantities(models.Model):
+	quantity_id = models.AutoField(primary_key=True)
 	date = models.DateField()
 	maize_bran = models.IntegerField(default=0)
 	cotton = models.IntegerField(default=0)
@@ -61,8 +58,7 @@ class RawMaterialQuantities(models.Model):
 	shells = models.IntegerField(default=0)
 	meat_boaster = models.IntegerField(default=0)
 	egg_boaster = models.IntegerField(default=0)
-
 	def __str__(self):
-		return '{}'.format(self.date)
+		return '{}'.format(self.quantity_id)
 
 

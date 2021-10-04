@@ -239,6 +239,15 @@ https://docs.djangoproject.com/en/3.2/howto/custom-template-tags/
 
 How to retrieve data from a django form 
 http://www.learningaboutelectronics.com/Articles/How-to-retrieve-data-from-a-Django-form-Python.php
+
+# Lessons
+October 1st 2021
+## How to Get django object id  in a single model occurance
+```python
+place = Places.objects.get(name='kansas')
+print place.id
+
+```
 # Contributors 
 
 Lutaro Ronnie 
