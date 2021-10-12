@@ -221,6 +221,9 @@ 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
 
 September 22th 2021
 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
+
+October 5th 2021
+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
 References
 DJANGO CRUD
 https://www.geeksforgeeks.org/django-crud-create-retrieve-update-delete-function-based-views/
@@ -246,8 +249,18 @@ October 1st 2021
 ```python
 place = Places.objects.get(name='kansas')
 print place.id
-
 ```
+
+October 4th 2021
+I have an issue that when the products table is empty 
+then some one sends in the first quantity
+But when the second quantity is added in . I dnot see the it being added to the products table
+
+So am thinking that if a Supplier supplies , Kamanyire . Its gets recorded as a supply. 
+Then i can also get add that quantity inside the RMQ table too.
+
+OCtober 5th 2021
+
 # Contributors 
 
 Lutaro Ronnie 

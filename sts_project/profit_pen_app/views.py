@@ -20,9 +20,6 @@ def create_supply(request):
 	form = RawMaterialForm(request.POST or None)
 
 	if form.is_valid():
-
-		
-
 		form.save()
 		#Its here that after the supply is made then we shall start populating the RawMaterialQuantities
 		#table

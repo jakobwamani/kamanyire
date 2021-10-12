@@ -2,7 +2,7 @@ from django import forms
 from .models import RawMaterial , Product
 from django.utils import timezone
 
-RAW_MATERIAL_CHOICES = (("maize_bran" , "maize_bran"),("cotton ", "cotton")
+RAW_MATERIAL_CHOICES = (("maize_bran" , "maize_bran"),("cotton", "cotton")
 ,("sun_flower" , "sun_flower")
 ,("fish" , "fish")
 ,("salt" ,"salt")
