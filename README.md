@@ -261,6 +261,22 @@ Then i can also get add that quantity inside the RMQ table too.
 
 OCtober 5th 2021
 
+October 21st 2021
+Am facing a challenge ,so far all was going great 
+when a supply is made 
+A supply record can be created inside the supply model at the same time a raw_material_quantites model is also populated
+A supply can also be retrieved inside the supply model 
+Issues come when i want to update the the supply model , yes the update works on the supply
+model but doesnot continue to the raw material quanitities model 
+
+### Solution
+Am actually thinking that this is a logic problem
+if am able to capture the updated form and then grab the item that is being updated hence 
+i will grab the updated quantity from the form 
+Then proceed to the RMQ model to update the quantity , its just math
+get the updated quantity 
+
+
 # Contributors 
 
 Lutaro Ronnie 

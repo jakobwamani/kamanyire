@@ -9,7 +9,31 @@ from django.contrib import messages
 
 
 def index(request):
-    return HttpResponse("Hello, world. Welcome to the profitpen system.")
+	#To create a new instance of the RMQ model 
+	#grab the lastest instance inside the RMQ model
+	lastitem = RawMaterialQuantities.objects.last()
+	if lastitem.date == datetime.datetime.now():
+	    print("Dates are equal")
+	else:
+		#duplicate the last instance
+		dup_maize_bran = lastitem.maize_bran 
+		dup_cotton = lastitem.cotton
+		dup_sun_flower = lastitem.sun_flower
+		dup_fish = lastitem.fish
+		dup_salt = lastitem.salt
+		dup_general_purpose_premix = lastitem.general_purpose_premix
+		dup_layers_premix = lastitem.layers_premix
+		dup_shells = lastitem.shells
+		dup_meat_boaster = lastitem.meat_boaster
+		dup_egg_boaster=lastitem.egg_boaster
+		duplicate_quantiites = RawMaterialQuantities.objects.create(date = datetime.datetime.now(),maize_bran = dup_maize_bran ,cotton = dup_cotton,
+                                                               sun_flower = dup_sun_flower, fish = dup_fish,salt = dup_salt ,
+                                                               general_purpose_premix = dup_general_purpose_premix,layers_premix = dup_layers_premix,
+                                                               shells = dup_shells, meat_boaster = dup_meat_boaster,egg_boaster=dup_egg_boaster)
+
+
+
+	return HttpResponse("Hello, world. Welcome to the profitpen system.")
 
 def create_supply(request):
 	# dictionary for initial data with
@@ -29,7 +53,6 @@ def create_supply(request):
 
 	return render(request, "supply.html",context)
 	
-
 def viewing_supply(request):
    	#get the date from the user 
 	start_date = request.GET.get('start_date')
@@ -53,7 +76,8 @@ def updating_supply(request):
 		supply_record = RawMaterial.objects.get(id=clean_pk)
 		form = RawMaterialForm(request.POST or None, instance=supply_record)
     
-		if form.is_valid():			
+		if form.is_valid():
+						
 			form.save()
 			redirect('view_supply.html')
 		context_dict["form"] = form
@@ -101,9 +125,10 @@ def viewing_product(request):
    	#get the date from the user 
 	start_date = request.GET.get('start_date')
 	end_date = request.GET.get('end_date')
+	# six_months.strftime('%Y%m%d')
 
 	# run a query to get all the supplies on that date
-	products = Product.objects.filter(date__range=[start_date, end_date])
+	products = RawMaterial.objects.filter(date__range=[start_date, end_date])
 
 	print(type(products))
      

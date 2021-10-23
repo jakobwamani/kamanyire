@@ -14,7 +14,7 @@ class RawMaterial(models.Model):
 	unit_price = models.IntegerField()
 	#Am making this a null True because when the user is entering the supply data , am not able to make it appear
 	#immediately , that's above my paygrade
-	amount = models.IntegerField(default=0)
+	# amount = models.IntegerField(default=0)
 	transport = models.IntegerField()
 	onloading = models.IntegerField()
 	offloading = models.IntegerField()
@@ -22,7 +22,7 @@ class RawMaterial(models.Model):
 	#Am making this a null True because when the user is entering the supply data , am not able to make it appear
 	#immediately , that's above my paygrade
 	cost_of_supply = models.IntegerField(default=0)
-	pricing = models.IntegerField(default=0)
+	# pricing = models.IntegerField(default=0)
 	# renames the instances of the model
 	# with their title name
 	def __str__(self):
