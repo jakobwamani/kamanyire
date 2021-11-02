@@ -234,6 +234,84 @@ def compute_quantities():
          addition.egg_boaster = total_quantity
          addition.save()
 
+def reduce_due_to_deletion(supply_item,supply_quantity):
+   
+   # maize_bran,cotton,sun_flower,fish,salt,general_purpose_premix,layers_premix ,shells 
+   # ,meat_boaster ,egg_boaster 
+   if supply_item == "maize_bran":
+      instance = RawMaterialQuantities.objects.last()
+      current_quantity = instance.maize_bran
+      quantity_update = current_quantity - supply_quantity
+      instance.maize_bran = quantity_update
+      instance.save()
+
+   elif supply_item == "cotton":
+      instance = RawMaterialQuantities.objects.last()
+      current_quantity = instance.cotton
+      quantity_update = current_quantity - supply_quantity
+      instance.cotton = quantity_update
+      instance.save()
+
+   elif supply_item == "sun_flower":
+      instance = RawMaterialQuantities.objects.last()
+      current_quantity = instance.sun_flower
+      quantity_update = current_quantity - supply_quantity
+      instance.sun_flower = quantity_update
+      instance.save()
+
+   elif supply_item == "fish":
+      instance = RawMaterialQuantities.objects.last()
+      current_quantity = instance.fish
+      quantity_update = current_quantity - supply_quantity
+      instance.fish = quantity_update
+      instance.save()
+
+   elif supply_item == "salt":
+      instance = RawMaterialQuantities.objects.last()
+      current_quantity = instance.salt
+      quantity_update = current_quantity - supply_quantity
+      instance.salt = quantity_update
+      instance.save()
+
+   elif supply_item == "general_purpose_premix":
+      instance = RawMaterialQuantities.objects.last()
+      current_quantity = instance.general_purpose_premix
+      quantity_update = current_quantity - supply_quantity
+      instance.general_purpose_premix = quantity_update
+      instance.save()
+
+   elif supply_item == "layers_premix":
+      instance = RawMaterialQuantities.objects.last()
+      current_quantity = instance.layers_premix
+      quantity_update = current_quantity - supply_quantity
+      instance.layers_premix = quantity_update
+      instance.save()
+
+   elif supply_item == "shells":
+      instance = RawMaterialQuantities.objects.last()
+      current_quantity = instance.shells
+      quantity_update = current_quantity - supply_quantity
+      instance.shells = quantity_update
+      instance.save()
+
+   elif supply_item == "meat_boaster":
+      instance = RawMaterialQuantities.objects.last()
+      current_quantity = instance.meat_boaster
+      quantity_update = current_quantity - supply_quantity
+      instance.meat_boaster = quantity_update
+      instance.save()
+
+   elif supply_item == "egg_boaster":
+      instance = RawMaterialQuantities.objects.last()
+      current_quantity = instance.egg_boaster
+      quantity_update = current_quantity - supply_quantity
+      instance.egg_boaster = quantity_update
+      instance.save()
+
+   return print("Numbers successfully reduced")
+
+
+
 
 
 

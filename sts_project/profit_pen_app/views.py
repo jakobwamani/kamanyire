@@ -486,7 +486,7 @@ def updating_supply(request):
 
 					if rear_date != earlist_date:
 						current_salt_value = current_supply.salt
-						increased_value =  current_salt_value - reducee_quantity_value
+						increased_value =  current_salt_value - reduce_quantity_value
 						current_supply.salt = increased_value
 						current_supply.save()
 					else:
@@ -587,18 +587,6 @@ def updating_supply(request):
 						current_supply.save()
 					else:
 						print("move on with life")
-
-
-
-
-
-						
-
-
-
-
-			
-
 			
 			form.save()
 			redirect('view_supply.html')
@@ -612,12 +600,22 @@ def delete_supply(request):
         pk = request.GET['id']
         clean_pk = pk.strip("/")
         cleaned_pk = int(clean_pk)
-        supply_record_to_delete = RawMaterial.objects.get(id=cleaned_pk)  
-        if request.method=='POST':
-            supply_record_to_delete.delete()
-            return redirect('view_supply.html')
+        supply_record_to_delete = RawMaterial.objects.get(id=cleaned_pk) 
+        #But before we delete , we must reduce on the amount in the RMQ model
+        #since this is an object , i will create a function right away
+        supply_item = supply_record_to_delete.item
+        supply_quantity = supply_record_to_delete.quantity
+        #put them inside a function right away
+        reduce_due_to_deletion(supply_item,supply_quantity) 
+        supply_record_to_delete.delete()
+        redirect('view_supply.html')
+        # if request.method =='POST':
+        # 	#we get to know the item 
 
-        context_dict["object"] = supply_record_to_delete
+        #     supply_record_to_delete.delete()
+        #     return redirect('view_supply.html')
+
+        # context_dict["object"] = supply_record_to_delete
     return render(request, "delete_supply.html",context=context_dict)
 
 def create_product(request):
