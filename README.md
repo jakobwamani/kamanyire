@@ -224,6 +224,9 @@ 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
 
 October 5th 2021
 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
+
+October 23rd 2021
+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
 References
 DJANGO CRUD
 https://www.geeksforgeeks.org/django-crud-create-retrieve-update-delete-function-based-views/
@@ -276,7 +279,47 @@ i will grab the updated quantity from the form
 Then proceed to the RMQ model to update the quantity , its just math
 get the updated quantity 
 
+October 22 2021
+Another Guess
+Let each update function be executed in a clear way that's clear , a user clearly indicates that they are increasing or decreasing the quantity of the raw material . All this is done in the form.
 
+Let the RMQ model have a date attribute such that when an update is made . its only a specific quanitity for a specific quantity is updated . 
+
+After that is done , the latest quanitity of the latest date is also updated through increment of decrement. 
+
+Let the an instance of the RMQ model be created on every new day . 
+
+### Implementation
+Each time some one visits the index page and on a new day, an RMQ instance is created replicated the latest instance.
+
+How
+grab the last instance
+is it the same date as today?
+duplicate of the last instance in the model and make it the latest?
+
+after that is done ? we now head to updating the RMQ model
+
+get the incrementor or decrementor value and the specific date value from the form
+increment or decrement a specific quantity of a specific date .
+increment or decrement a specific quantity of the latest occurance.
+
+What about when a new supply is being made what happens to the date?
+Remember when some came on to the index a new instance with a new date was created so that's the date we use because remember we also pick the latest instance in the RMQ model as we are dealing with supply function.
+
+
+October 28th 2021
+We are now going to look at the delete function
+
+We must know the raw material to be worked upon
+We must know the quantity of the raw materials
+Reduce on the quantity of the raw materials
+
+November 3rd 2021
+PRODUCT CRUD
+Identify the raw materials
+Have a rawmaterials mixed
+-subtract the quantities of each raw material inside the RMQ models
+Have a product created
 # Contributors 
 
 Lutaro Ronnie 

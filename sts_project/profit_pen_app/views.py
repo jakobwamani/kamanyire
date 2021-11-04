@@ -607,6 +607,7 @@ def delete_supply(request):
         supply_quantity = supply_record_to_delete.quantity
         #put them inside a function right away
         reduce_due_to_deletion(supply_item,supply_quantity) 
+        
         supply_record_to_delete.delete()
         redirect('view_supply.html')
         # if request.method =='POST':
@@ -622,20 +623,33 @@ def create_product(request):
 	context = {}
 	form = ProductForm(request.POST or None)
 	if form.is_valid():
-			
-		maize_bran_ingridient = form.cleaned_data['maize_bran']
-		 
-		subtracting('maize_bran')
 
-		remaining_maize_bran = maize_bran_ingridient - subtracting('maize_bran')
-		#if the balance is less than zero 
-		if remaining_maize_bran < 0:
-			messages.add_message(request, messages.INFO, 'Maize_bran is over')
-		else:
-			messages.add_message(request, messages.INFO, "Remaining_maize_bran " + str(remaining_maize_bran) + "kilograms")
+		product = form.cleaned_data['product']	
+		maize_bran = form.cleaned_data['maize_bran']
+		cotton = form.cleaned_data['cotton']
+		sun_flower = form.cleaned_data['sun_flower']
+		fish = form.cleaned_data['fish']
+		salt = form.cleaned_data['salt']
+		general_purpose_premix = form.cleaned_data['general_purpose_premix']
+		layers_premix = form.cleaned_data['layers_premix']
+		shells = form.cleaned_data['shells']
+		meat_boaster = form.cleaned_data['meat_boaster']
+		egg_boaster = form.cleaned_data['egg_boaster']
+
+
+	   	# maize_bran,cotton,sun_flower,fish,salt,general_purpose_premix,layers_premix ,shells 
+   		# ,meat_boaster ,egg_boaster
+		 
+		subtracting(product,maize_bran,cotton,sun_flower,fish,salt,general_purpose_premix,layers_premix,shells,meat_boaster,egg_boaster)
+
+		# remaining_maize_bran = maize_bran_ingridient - subtracting('maize_bran')
+		# #if the balance is less than zero 
+		# if remaining_maize_bran < 0:
+		# 	messages.add_message(request, messages.INFO, 'Maize_bran is over')
+		# else:
+		# 	messages.add_message(request, messages.INFO, "Remaining_maize_bran " + str(remaining_maize_bran) + "kilograms")
 		
-		#so we are now
-		    	
+		# #so we are now		    	
 		form.save()
 	context['form'] = form
 
@@ -646,12 +660,9 @@ def viewing_product(request):
 	start_date = request.GET.get('start_date')
 	end_date = request.GET.get('end_date')
 	# six_months.strftime('%Y%m%d')
-
 	# run a query to get all the supplies on that date
-	products = RawMaterial.objects.filter(date__range=[start_date, end_date])
-
-	print(type(products))
-     
+	products = Product.objects.filter(date__range=[start_date, end_date])
+	print(type(products))   
 	return render(request, "view_product.html", {'products':products}) 
 
 def updating_product(request):
@@ -676,7 +687,7 @@ def updating_product(request):
 
 	return render(request,"update_product.html",context=context_dict)
 
-def delete_product(request):
+def deleting_product(request):
     # book= get_object_or_404(Book, pk=pk)  
     context_dict = {}
 
@@ -685,9 +696,10 @@ def delete_product(request):
         clean_pk = pk.strip("/")
         cleaned_pk = int(clean_pk)
         product_record_to_delete = Product.objects.get(id=cleaned_pk)  
-        if request.method=='POST':
-            product_record_to_delete.delete()
-            return redirect('view_product.html')
+        # if request.method=='POST':
+        product_record_to_delete.delete()
+        return redirect('view_products')
+        # return redirect('../view_product.html')
 
-        context_dict["object"] = product_record_to_delete
+        # context_dict["object"] = product_record_to_delete
     return render(request, "delete_product.html",context=context_dict)

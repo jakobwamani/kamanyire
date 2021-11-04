@@ -38,8 +38,10 @@ class Product(models.Model):
 	salt = models.IntegerField(default=0)
 	layers_premix = models.IntegerField(default=0)
 	shells = models.IntegerField(default=0)
-	maize_boaster = models.IntegerField(default=0)
+	meat_boaster = models.IntegerField(default=0)
 	egg_boaster = models.IntegerField(default=0)
+	fish = models.IntegerField(default=0)
+	general_purpose_premix = models.IntegerField(default=0)
 	def __str__(self):
 		return '{}'.format(self.product)
 

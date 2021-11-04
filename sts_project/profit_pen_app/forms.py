@@ -111,16 +111,18 @@ class ProductForm(forms.ModelForm):
 	date = forms.DateField(label='Date', widget=forms.SelectDateWidget(years=YEARS),initial=timezone.now())
 	# date = forms.DateField()
 	product = forms.ChoiceField(choices=PRODUCT_CHOICES)
-	maize_bran = forms.IntegerField()
-	cotton = forms.IntegerField()
-	sun_flower = forms.IntegerField()
-	salt = forms.IntegerField()
-	layers_premix = forms.IntegerField()
-	shells = forms.IntegerField()
-	maize_boaster = forms.IntegerField()
-	egg_boaster = forms.IntegerField()
+	fish = forms.IntegerField(initial = 0)
+	maize_bran = forms.IntegerField(initial = 0)
+	cotton = forms.IntegerField(initial = 0)
+	sun_flower = forms.IntegerField(initial = 0)
+	salt = forms.IntegerField(initial = 0)
+	layers_premix = forms.IntegerField(initial = 0)
+	general_purpose_premix = forms.IntegerField(initial = 0)
+	shells = forms.IntegerField(initial = 0)
+	meat_boaster = forms.IntegerField(initial = 0)
+	egg_boaster = forms.IntegerField( initial = 0)
 
 	class Meta:
 		model = Product
 
-		fields = ["date","product","maize_bran","cotton","sun_flower","salt","layers_premix","shells","maize_boaster","egg_boaster"]
+		fields = ["date","product","maize_bran","cotton","sun_flower","salt","layers_premix","general_purpose_premix","shells","meat_boaster","egg_boaster","fish"]

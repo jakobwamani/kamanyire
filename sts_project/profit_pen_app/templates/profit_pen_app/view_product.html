@@ -18,44 +18,44 @@ View Products
 
      <table style="border:1px">
                     <ul>
-    
+        <!-- maize_bran,cotton,sun_flower,fish,salt,general_purpose_premix,layers_premix ,shells 
+        meat_boaster ,egg_boaster  -->
                     <tr>
                         <th>Product Id</th>
                         <th>Date</th>
-                        <th>Receipt Number</th>
-                        <th>Supplier</th>
-                        <th>Item</th>
-                        <th>Quantity</th>
-                        <th>Unit Price</th>
-                        <th>Amount</th>
-                        <th>Transport</th>
-                        <th>On loading</th>
-                        <th>Off loading</th>
-                        <th>Grinding</th>
-                        <th>Cost of Supply</th>
+                        <th>Maize_bran</th>
+                        <th>Cotton</th>
+                        <th>Sun_Flower</th>
+                        <th>Fish</th>
+                        <th>Salt</th>
+                        <th>General Purpose_Premix</th>
+                        <th>Layers_Premix</th>
+                        <th>Shells</th>
+                        <th>Meat Boaster</th>
+                        <th>Egg Boaster</th>
+                        <!-- <th>Cost of Supply</th> -->
                        <!--  <th>Total</th>
                         <th>Cost of Supply</th>
                         <th>Pricing</th> -->
                         <th>Update</th>
                         <th>Delete</th>
-
                        
                     </tr>
                     {% for product in products %}
                     <tr>
                         <td>{{ product.id}} </td>
                         <td>{{ product.date }} </td>
-                        <td>{{ product.receipt_number }}</td>
-                        <td>{{ product.supplier }}</td>
-                        <td>{{ product.item }}</td>
-                        <td>{{ product.quantity }}</td>
-                        <td>{{ product.unit_price }}</td>                      
-                        <td>{{ product.amount }} </td>
-                        <td>{{ product.transport }} </td>
-                        <td>{{ product.onloading }} </td>
-                        <td>{{ product.offloading }} </td>
-                        <td>{{ product.grinding }}</td>
-                        <td>{{ product.cost_of_supply}}</td>
+                        <td>{{ product.maize_bran }}</td>
+                        <td>{{ product.cotton }}</td>
+                        <td>{{ product.sun_flower }}</td>
+                        <td>{{ product.fish }}</td>
+                        <td>{{ product.salt }}</td>                      
+                        <td>{{ product.general_purpose_premix }} </td>
+                        <td>{{ product.layers_premix }} </td>
+                        <td>{{ product.shells }} </td>
+                        <td>{{ product.meat_boaster }} </td>
+                        <td>{{ product.egg_boaster }}</td>
+                        <!-- <td>{{ product.cost_of_supply}}</td> -->
                         <!--I dnot know why i had to back reference it , it just couldn't work with it -->
                         <td><a href="../update_product/?id={{ product.id }}">Update</a></td>
                         <td><a href="../delete_product/?id={{ product.id }}">Delete</a></td>
