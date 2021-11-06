@@ -100,12 +100,12 @@ class SupplyForm(forms.ModelForm):
 # layers_mash
 # lime
 # meat_boaster
-PRODUCT_CHOICES = (("broilers_mash","broilers_mash")
-,("chick_mash","chick_mash")
-,("egg_boaster","egg_boaster")
-,("growers_mash","growers_mash")
-,("layers_mash","layers_mash")
-,("meat_boaster","meat_boaster"))
+PRODUCT_CHOICES = (("broilers_marsh","broilers_marsh")
+,("chick_marsh","chick_marsh")
+,("growers_marsh","growers_marsh")
+,("old_pig","old_pig")
+,("layers_marsh","layers_marsh")
+,("young_pig","young_pig"))
 class ProductForm(forms.ModelForm):
 	YEARS= [x for x in range(2000,2030)]
 	date = forms.DateField(label='Date', widget=forms.SelectDateWidget(years=YEARS),initial=timezone.now())

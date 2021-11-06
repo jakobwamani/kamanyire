@@ -45,8 +45,6 @@ class Product(models.Model):
 	def __str__(self):
 		return '{}'.format(self.product)
 
-
-
 class RawMaterialQuantities(models.Model):
 	quantity_id = models.AutoField(primary_key=True)
 	date = models.DateField()
@@ -62,5 +60,17 @@ class RawMaterialQuantities(models.Model):
 	egg_boaster = models.IntegerField(default=0)
 	def __str__(self):
 		return '{}'.format(self.quantity_id)
+
+class ProductQuantities(models.Model):
+	date = models.DateField()
+	broilers_marsh = models.IntegerField(default = 0)
+	chick_marsh = models.IntegerField(default=0)
+	old_pig = models.IntegerField(default=0)
+	growers_marsh = models.IntegerField(default=0)
+	layers_marsh = models.IntegerField(default=0)
+	young_pig = models.IntegerField(default=0)
+	
+	def __str__(self):
+		return '{}'.format(self.date)
 
 

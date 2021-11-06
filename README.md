@@ -319,7 +319,40 @@ PRODUCT CRUD
 Identify the raw materials
 Have a rawmaterials mixed
 -subtract the quantities of each raw material inside the RMQ models
+-
 Have a product created
+
+Retrieve
+Done
+
+Update
+Done
+
+Delete
+Done
+
+
+Product sales
+A purchase price is noticed 
+So i have sales for two things the products and raw materials, i will begin with products 
+Am suspecting that i must have other two models one for product quantities and another for product pricing
+A selling price is determined 
+A purhase price is subtracted from selling price
+A product is sold
+A profit is made
+
+November 6th 2021
+Am thinking of it this way , like so
+#### product quantites model
+-For saving the quantities of the products
+#### product retail price model
+-For saving retail prices of product
+#### Raw material retail price model
+-For saving the retail prices of raw materials
+#### Product sales model
+-For saving sales information
+#### Raw material sales model
+-For saving raw material sales information 
 # Contributors 
 
 Lutaro Ronnie 

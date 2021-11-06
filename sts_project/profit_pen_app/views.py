@@ -649,7 +649,10 @@ def create_product(request):
 		# else:
 		# 	messages.add_message(request, messages.INFO, "Remaining_maize_bran " + str(remaining_maize_bran) + "kilograms")
 		
-		# #so we are now		    	
+		# #so we are now		
+
+		#populate the product quantities model
+		compute_product_quantities()    	
 		form.save()
 	context['form'] = form
 

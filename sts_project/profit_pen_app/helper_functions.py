@@ -1,4 +1,4 @@
-from .models import RawMaterial , Product , RawMaterialQuantities
+from .models import RawMaterial , Product , RawMaterialQuantities , ProductQuantities
 import datetime
 
 def subtracting(a,mai,cot,sun,fis,sal,gpp,lyp,she,meb,egb):
@@ -67,6 +67,7 @@ def subtracting(a,mai,cot,sun,fis,sal,gpp,lyp,she,meb,egb):
    #    maize_bran_supply_quantities.append(value)
    #    #get the sum of quantites inside the maize_bran_supply_quantities
    # return sum(maize_bran_supply_quantities)
+
 def compute_quantities():
    check_row = RawMaterialQuantities.objects.count()
 
@@ -171,18 +172,13 @@ def compute_quantities():
             quantity_addition.egg_boaster = total_quantity
             quantity_addition.save()
 
- 
-
-
-
-
    elif check_row == 0:
       #create default quantities
      
       default_quantiites = RawMaterialQuantities.objects.create(date = datetime.datetime.now(),maize_bran = 0 ,cotton = 0,
                                                                sun_flower = 0, fish = 0,salt = 0 ,
                                                                general_purpose_premix = 0,layers_premix = 0,
-                                                               shells = 0, meat_boaster = 0,egg_boaster=0)
+                                                                shells = 0, meat_boaster = 0,egg_boaster=0)
       #next thing that we need to do is to populate the RawmaterialQuantities table
       #with the initial values
       #get the item inside the raw materials model and then update the row in RMQ model
@@ -359,6 +355,66 @@ def reduce_due_to_deletion(supply_item,supply_quantity):
       instance.save()
 
    return print("Numbers successfully reduced")
+
+def compute_product_quantities():
+   # (("broilers_marsh","broilers_marsh")
+   # ,("chick_marsh","chick_marsh")
+   # ,("growers_marsh","growers_marsh")
+   # ,("old_pig","old_pig")
+   # ,("layers_mash","layers_marsh")
+   # ,("young_pig","young_pig"))
+   check_product_quantities_model = ProductQuantities.objects.count()
+
+   #check if model has any instances
+   if check_product_quantities_model >= 1:
+      #we also have to check if the product model is populated
+      if check_product_model >= 1:
+         #get the last instance of the model
+         last_product_entry = Product.objects.last()
+         #now here i think i must am trying to get the quantity of a product 
+         if last_product_entry.product == "broilers_marsh":
+            #get all the quantities on the raw_materials
+            #maize_bran,cotton,sun_flower,salt,layers_premix,shells,
+            # meat_boaster ,egg_boaster ,fish ,general_purpose_premix 
+            maize_bran_quantity = last_product_entry.maize_bran
+            cotton_quantity = last_product_entry.cotton
+            sun_flower_quantity = last_product_entry.sun_flower
+            salt_quantity = last_product_entry.salt
+            layers_premix_quantity = last_product_entry.layers_premix
+            shells_quantity = last_product_entry.shells
+            meat_boaster_quantity = last_product_entry.meat_boaster
+            egg_boaster_quantity = last_product_entry.egg_boaster
+            fish_quantity = last_product_entry.fish
+            general_purpose_premix_quantity = last_product_entry.fish
+            #Sum up everything
+            total_quantity = maize_bran_quantity + cotton_quantity + sun_flower_quantity + salt_quantity
+            +layers_premix_quantity + shells_quantity + meat_boaster_quantity + egg_boaster_quantity
+            +fish_quantity + general_purpose_premix_quantity
+
+            #get the last instance in the Product Quantities model
+            last_product_quantities_entry = ProductQuantities.objects.last()
+            #get the broilers_marsh quantity
+            current_broilers_marsh_quantity = last_product_quantities_entry.broilers_marsh
+
+            summation = total_quantity + current_broilers_marsh_quantity
+
+            last_product_quantities_entry.broilers_marsh = summation
+
+            last_product_quantities_entry.save()
+
+   else:
+      #if its empty then we shall create something
+      # date ,broilers_marsh ,chick_marsh,old_pig ,growers_marsh,layers_marsh ,young_pig 
+      create_product_quantites = ProductQuantities.objects.create(date = datetime.datetime.now(),broilers_marsh = 0,chick_marsh = 0 ,old_pig = 0,
+                                                                growers_marsh =  0, layers_marsh = 0,young_pig  = 0)
+
+
+
+
+
+
+
+
 
 
 
