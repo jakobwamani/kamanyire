@@ -45,29 +45,6 @@ def subtracting(a,mai,cot,sun,fis,sal,gpp,lyp,she,meb,egb):
    instance.egg_boaster = current_egg_boaster
    instance.save()
 
-   # create a a occurance in the product model
-   # create_product = Product.objects.create(date = datetime.datetime.now(),product = a,maize_bran = current_maize ,cotton = current_cotton,
-   #                                                             sun_flower = current_sun_flower, fish = current_fish,salt = current_salt ,
-   #                                                             general_purpose_premix = current_general_purpose_premix,layers_premix = current_layers_premix,
-   #                                                             shells = current_shells, meat_boaster = current_meat_boaster,egg_boaster=current_egg_boaster)
-   
-
-
-   # #maize_bran_ingridient = form.cleaned_data['maize_bran']
-   # maize_bran_supply = RawMaterial.objects.filter(item=raw_material)
-   # #
-   # maize_bran_supply_list = list(maize_bran_supply)
-   # # Create an empty list to store the quantites 
-   # maize_bran_supply_quantities = []
-   # # For every item in the maize_bran_supply_list , get the quantity attribute and add it to the empty list.
-   # for quantity_attribute in maize_bran_supply_list:
-   #    #get the value of the quantity
-   #    value = quantity_attribute.quantity
-   #    #populate the empty list
-   #    maize_bran_supply_quantities.append(value)
-   #    #get the sum of quantites inside the maize_bran_supply_quantities
-   # return sum(maize_bran_supply_quantities)
-
 def compute_quantities():
    check_row = RawMaterialQuantities.objects.count()
 
@@ -281,7 +258,6 @@ def compute_quantities():
          addition.save()
 
 def reduce_due_to_deletion(supply_item,supply_quantity):
-   
    # maize_bran,cotton,sun_flower,fish,salt,general_purpose_premix,layers_premix ,shells 
    # ,meat_boaster ,egg_boaster 
    if supply_item == "maize_bran":
@@ -357,57 +333,96 @@ def reduce_due_to_deletion(supply_item,supply_quantity):
    return print("Numbers successfully reduced")
 
 def compute_product_quantities():
-   # (("broilers_marsh","broilers_marsh")
-   # ,("chick_marsh","chick_marsh")
-   # ,("growers_marsh","growers_marsh")
-   # ,("old_pig","old_pig")
-   # ,("layers_mash","layers_marsh")
-   # ,("young_pig","young_pig"))
-   check_product_quantities_model = ProductQuantities.objects.count()
-
-   #check if model has any instances
-   if check_product_quantities_model >= 1:
-      #we also have to check if the product model is populated
-      if check_product_model >= 1:
-         #get the last instance of the model
-         last_product_entry = Product.objects.last()
-         #now here i think i must am trying to get the quantity of a product 
-         if last_product_entry.product == "broilers_marsh":
-            #get all the quantities on the raw_materials
-            #maize_bran,cotton,sun_flower,salt,layers_premix,shells,
-            # meat_boaster ,egg_boaster ,fish ,general_purpose_premix 
-            maize_bran_quantity = last_product_entry.maize_bran
-            cotton_quantity = last_product_entry.cotton
-            sun_flower_quantity = last_product_entry.sun_flower
-            salt_quantity = last_product_entry.salt
-            layers_premix_quantity = last_product_entry.layers_premix
-            shells_quantity = last_product_entry.shells
-            meat_boaster_quantity = last_product_entry.meat_boaster
-            egg_boaster_quantity = last_product_entry.egg_boaster
-            fish_quantity = last_product_entry.fish
-            general_purpose_premix_quantity = last_product_entry.fish
-            #Sum up everything
-            total_quantity = maize_bran_quantity + cotton_quantity + sun_flower_quantity + salt_quantity
-            +layers_premix_quantity + shells_quantity + meat_boaster_quantity + egg_boaster_quantity
-            +fish_quantity + general_purpose_premix_quantity
-
-            #get the last instance in the Product Quantities model
-            last_product_quantities_entry = ProductQuantities.objects.last()
-            #get the broilers_marsh quantity
-            current_broilers_marsh_quantity = last_product_quantities_entry.broilers_marsh
-
-            summation = total_quantity + current_broilers_marsh_quantity
-
-            last_product_quantities_entry.broilers_marsh = summation
-
-            last_product_quantities_entry.save()
+   print("Today shit was tuff , just had to repeat the whole thing")
+   # new quantity of broilers_marsh is gotten by summing up all the quantities of the last instance in product model
+   # Current quantity of broilers_marsh? i will probe the pq model for last instance
+   # have the current quantity of broilers_marsh
+   # also the new quantity of broilers_marsh
+   # add the quantity of broilers_marsh
+   # Do any products exist 
+   
+   #do the same for Raw material quantities
+   if ProductQuantities.objects.count() == 0:
+      create_them = ProductQuantities.objects.create(date = datetime.datetime.now(), broilers_marsh = 0 , chick_marsh = 0 , old_pig = 0 , growers_marsh =0 ,
+                     layers_marsh = 0 , young_pig = 0)
 
    else:
-      #if its empty then we shall create something
-      # date ,broilers_marsh ,chick_marsh,old_pig ,growers_marsh,layers_marsh ,young_pig 
-      create_product_quantites = ProductQuantities.objects.create(date = datetime.datetime.now(),broilers_marsh = 0,chick_marsh = 0 ,old_pig = 0,
-                                                                growers_marsh =  0, layers_marsh = 0,young_pig  = 0)
+      if Product.objects.count() == 0:
+         #create the product 
+         make = Product.objects.create(date= datetime.datetime.now(),product="broilers_marsh",maize_bran = 0,
+                  cotton = 0 , sun_flower = 0 , salt = 0 , layers_premix = 0 ,shells = 0, meat_boaster = 0 , egg_boaster = 0 , fish = 0, general_purpose_premix = 0  )
+         print("A product has been created")
+      else:
+         last_product = Product.objects.last()
+         #we are going to get all the attributes of the last instance 
+         mb = last_product.maize_bran
+         co = last_product.cotton
+         sf = last_product.sun_flower
+         fi = last_product.fish
+         sa = last_product.salt
+         gpp = last_product.general_purpose_premix
+         lp = last_product.layers_premix
+         sh = last_product.shells
+         mb = last_product.meat_boaster
+         eb = last_product.egg_boaster
+         # add them together
+         last_quantity = mb + co + sf + fi + sa + gpp + lp + sh + mb + eb 
 
+         current_quantity = ProductQuantities.objects.last()
+         if last_product.product == "broilers_marsh":
+            current_bm = current_quantity.broilers_marsh
+            #add the stuff together
+            summation = current_bm + last_quantity
+            #we go update the broilers_marsh
+            current_quantity.broilers_marsh = summation
+            current_quantity.save()
+
+def adding(product,maize_bran,cotton,sun_flower,fish,salt,general_purpose_premix,layers_premix,shells,meat_boaster,egg_boaster):   
+   #here we are getting the product from the form
+   #we could first add up all the rawmats and have one figure
+   total_quantity = maize_bran + cotton + sun_flower + fish + salt + general_purpose_premix + layers_premix + shells + meat_boaster + egg_boaster
+   last_quantity = ProductQuantities.objects.last()
+   if product == "broilers_marsh":
+      item = last_quantity.broilers_marsh 
+      new_quantity = total_quantity + item
+      last_quantity.broilers_marsh = new_quantity
+      last_quantity.save()
+
+   elif product == "chick_marsh":
+      item = last_quantity.chick_marsh
+      new_quantity = total_quantity + item
+      last_quantity.chick_marsh = new_quantity
+      last_quantity.save()
+
+   elif product == "old_pig":
+      item = last_quantity.old_pig
+      new_quantity = total_quantity + item
+      last_quantity.old_pig = new_quantity
+      last_quantity.save()
+
+   elif product == "growers_marsh":
+      item = last_quantity.growers_marsh
+      new_quantity = total_quantity + item
+      last_quantity.growers_marsh = new_quantity
+      last_quantity.save()
+
+   elif product == "layers_marsh":
+      item = last_quantity.layers_marsh
+      new_quantity = total_quantity + item
+      last_quantity.layers_marsh = new_quantity
+      last_quantity.save()
+
+   elif product == "young_pig":
+      item = last_quantity.young_pig
+      new_quantity = total_quantity + item 
+      last_quantity.young_pig = new_quantity
+      last_quantity.save()
+
+
+         
+
+
+      
 
 
 

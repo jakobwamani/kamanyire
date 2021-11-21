@@ -59,7 +59,7 @@ class RawMaterialQuantities(models.Model):
 	meat_boaster = models.IntegerField(default=0)
 	egg_boaster = models.IntegerField(default=0)
 	def __str__(self):
-		return '{}'.format(self.quantity_id)
+		return '{}'.format(self.date)
 
 class ProductQuantities(models.Model):
 	date = models.DateField()
@@ -70,6 +70,36 @@ class ProductQuantities(models.Model):
 	layers_marsh = models.IntegerField(default=0)
 	young_pig = models.IntegerField(default=0)
 	
+	def __str__(self):
+		return '{}'.format(self.date)
+
+class ProductPrices(models.Model):
+	date = models.DateField()
+	broilers_marsh = models.IntegerField(default = 0)
+	chick_marsh = models.IntegerField(default=0)
+	old_pig = models.IntegerField(default=0)
+	growers_marsh = models.IntegerField(default=0)
+	layers_marsh = models.IntegerField(default=0)
+	young_pig = models.IntegerField(default=0)
+	
+	def __str__(self):
+		return '{}'.format(self.date)
+
+
+class RawMaterialPrices(models.Model):
+	# quantity_id = models.AutoField(primary_key=True)
+	date = models.DateField()
+	maize_bran = models.IntegerField(default=0)
+	cotton = models.IntegerField(default=0)
+	sun_flower = models.IntegerField(default=0)
+	fish = models.IntegerField(default=0)
+	salt = models.IntegerField(default=0)
+	general_purpose_premix = models.IntegerField(default=0)
+	layers_premix = models.IntegerField(default=0)
+	shells = models.IntegerField(default=0)
+	meat_boaster = models.IntegerField(default=0)
+	egg_boaster = models.IntegerField(default=0)
+
 	def __str__(self):
 		return '{}'.format(self.date)
 

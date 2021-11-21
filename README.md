@@ -353,6 +353,20 @@ Am thinking of it this way , like so
 -For saving sales information
 #### Raw material sales model
 -For saving raw material sales information 
+
+
+Am facing a challenge with Product quantities , so i think that they must updated whenever a creation of a 
+new day
+When a product mixture is updated and also when a product is mixture is deleted
+
+On a new day
+
+November 14th 2021
+Populating the productquantities table
+I have when ever a product is created some quantities are reduced inside the RMQ table
+but i can do that with the ProductQuantities table.
+Add those quantities together and then update the quantity of a certain product.
+
 # Contributors 
 
 Lutaro Ronnie 

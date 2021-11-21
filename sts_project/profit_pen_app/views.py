@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from profit_pen_app.models import RawMaterial,Product,RawMaterialQuantities
-from profit_pen_app.forms  import RawMaterialForm ,ProductForm, SupplyForm
+from profit_pen_app.models import RawMaterial,Product,RawMaterialQuantities, ProductQuantities , ProductPrices , RawMaterialPrices
+from profit_pen_app.forms  import RawMaterialForm ,ProductForm ,RawMaterialPricesForm, SupplyForm , ProductPriceForm
 from django.http import HttpResponse
 from django.shortcuts import redirect
 from profit_pen_app.helper_functions import * 
@@ -17,7 +17,7 @@ def index(request):
 	if(count_quantities != 0):
 		#change dates into some specific dates (%x-Local version of date-12/31/18)
 		last_date = lastitem.date
-		rear_date =last_date.strftime("%x")
+		rear_date = last_date.strftime("%x")
 		current_date = datetime.datetime.now()
 		earlist_date = current_date.strftime("%x")
 		if rear_date == earlist_date:
@@ -40,6 +40,56 @@ def index(request):
 	                                                               shells = dup_shells, meat_boaster = dup_meat_boaster,egg_boaster=dup_egg_boaster)
 	else:
 		print("Just continue with life")
+
+	#do the same with Product 
+	lastproduct = ProductQuantities.objects.last()
+
+	count_pq = ProductQuantities.objects.count()
+	if(count_pq != 0):
+		last_date = lastproduct.date
+		rear_date = last_date.strftime("%x")
+		current_date = datetime.datetime.now()
+		earlist_date = current_date.strftime("%x")
+		if rear_date == earlist_date:
+			print("Dates are equal")
+		else:
+			dup_broilers_marsh = lastproduct.broilers_marsh
+			dup_chick_marsh = lastproduct.chick_marsh
+			dup_old_pig = lastproduct.old_pig
+			dup_growers_marsh = lastproduct.growers_marsh
+			dup_layers_marsh = lastproduct.layers_marsh
+			dup_young_pig = lastproduct.young_pig
+
+			duplicate_quantiites = ProductQuantities.objects.create(date = datetime.datetime.now(),broilers_marsh = dup_broilers_marsh , chick_marsh = dup_chick_marsh , 
+									old_pig = dup_old_pig , growers_marsh = dup_growers_marsh,layers_marsh = dup_layers_marsh , young_pig = dup_young_pig)
+	else:
+		print("Just continue with life")
+
+	last_product_price = ProductPrices.objects.last()
+
+	count_pp = ProductPrices.objects.count()
+	if(count_pp != 0 ):
+		last_date = last_product_price.date
+		rear_date = last_date.strftime("%x")
+		current_date = datetime.datetime.now()
+		earlist_date = datetime.datetime.now()
+		earlist_date = current_date.strftime("%x")
+		if rear_date == earlist_date:
+			print("Dates are equal")
+		else:
+			dup_broilers_marsh = last_product_price.broilers_marsh
+			dup_chick_marsh = last_product_price.chick_marsh
+			dup_old_pig = last_product_price.old_pig
+			dup_growers_marsh = last_product_price.growers_marsh
+			dup_layers_marsh = last_product_price.layers_marsh
+			dup_young_pig = last_product_price.young_pig
+
+			duplicate_prices = ProductQuantities.objects.create(date = datetime.datetime.now(),broilers_marsh = dup_broilers_marsh , chick_marsh = dup_chick_marsh , 
+									old_pig = dup_old_pig , growers_marsh = dup_growers_marsh,layers_marsh = dup_layers_marsh , young_pig = dup_young_pig)
+	else:
+		print("Why can't just be free , from the ways of this world")
+
+
 	return HttpResponse("Hello, world. Welcome to the profitpen system.")
 
 def create_supply(request):
@@ -636,25 +686,19 @@ def create_product(request):
 		meat_boaster = form.cleaned_data['meat_boaster']
 		egg_boaster = form.cleaned_data['egg_boaster']
 
-
 	   	# maize_bran,cotton,sun_flower,fish,salt,general_purpose_premix,layers_premix ,shells 
    		# ,meat_boaster ,egg_boaster
 		 
 		subtracting(product,maize_bran,cotton,sun_flower,fish,salt,general_purpose_premix,layers_premix,shells,meat_boaster,egg_boaster)
 
-		# remaining_maize_bran = maize_bran_ingridient - subtracting('maize_bran')
-		# #if the balance is less than zero 
-		# if remaining_maize_bran < 0:
-		# 	messages.add_message(request, messages.INFO, 'Maize_bran is over')
-		# else:
-		# 	messages.add_message(request, messages.INFO, "Remaining_maize_bran " + str(remaining_maize_bran) + "kilograms")
-		
-		# #so we are now		
-
 		#populate the product quantities model
-		compute_product_quantities()    	
+
+		adding(product,maize_bran,cotton,sun_flower,fish,salt,general_purpose_premix,layers_premix,shells,meat_boaster,egg_boaster)
+
 		form.save()
+		
 	context['form'] = form
+	redirect('index')
 
 	return render(request,"product.html",context)
 
@@ -706,3 +750,136 @@ def deleting_product(request):
 
         # context_dict["object"] = product_record_to_delete
     return render(request, "delete_product.html",context=context_dict)
+
+def create_product_price(request):
+	# dictionary for initial data with
+	# field names as keys
+	context = {}
+
+	# add the dictionary during initialization
+	form = ProductPriceForm(request.POST or None)
+
+	if form.is_valid():
+		form.save()
+		#Its here that after the supply is made then we shall start populating the RawMaterialQuantities
+		#table
+		# we shall check if the "RawMaterialQuantities" table has atleast one row
+		# compute_quantities()
+	context['form'] = form
+
+	return render(request, "create_product_price.html",context)
+
+def viewing_product_prices(request):
+   	#get the date from the user 
+	start_date = request.GET.get('start_date')
+	end_date = request.GET.get('end_date')
+
+	# broilers_marsh,chick_marsh,old_pig,growers_marsh,layers_marsh ,young_pig 
+
+	# run a query to get all the supplies on that date
+	p_prices = ProductPrices.objects.filter(date__range=[start_date, end_date])
+
+	# print(type(supplies))
+     
+	# return render(request, "view_supply.html", context)
+	return render(request, "view_product_prices.html", {'p_prices':p_prices})
+
+def updating_product_prices(request):
+	context_dict = {}
+
+	if 'id' in request.GET:
+		pk = request.GET['id']
+
+		print (pk)
+		clean_pk = pk.strip("/")
+		print (clean_pk)
+		product_prices = ProductPrices.objects.get(id=clean_pk)
+		form = ProductPriceForm(request.POST or None, instance=product_prices)
+    
+		if form.is_valid():
+			
+			form.save()
+
+			redirect('view_product_prices.html')
+
+		context_dict["form"] = form
+
+	return render(request,"update_product_prices.html",context=context_dict)
+
+def deleting_product_prices(request):
+
+    # book= get_object_or_404(Book, pk=pk)  
+    context_dict = {}
+    if 'id' in request.GET:
+        pk = request.GET['id']
+        clean_pk = pk.strip("/")
+        cleaned_pk = int(clean_pk)
+        product_price_to_delete = ProductPrices.objects.get(id=cleaned_pk) 
+        #But before we delete , we must reduce on the amount in the RMQ model
+        #since this is an object , i will create a function right away
+        
+        product_price_to_delete.delete()
+        redirect('view_product_prices.html')
+        # if request.method =='POST':
+        # 	#we get to know the item 
+
+        #     supply_record_to_delete.delete()
+        #     return redirect('view_supply.html')
+
+        # context_dict["object"] = supply_record_to_delete
+    return render(request, "delete_product_prices.html",context=context_dict)
+
+def create_raw_material_prices(request):
+	# dictionary for initial data with
+	# field names as keys
+	context = {}
+
+	# add the dictionary during initialization
+	form = RawMaterialPricesForm(request.POST or None)
+
+	if form.is_valid():
+		form.save()
+		#Its here that after the supply is made then we shall start populating the RawMaterialQuantities
+		#table
+		# we shall check if the "RawMaterialQuantities" table has atleast one row
+		# compute_quantities()
+	context['form'] = form
+
+	return render(request, "create_raw_material_prices.html",context)
+
+def view_raw_material_prices(request):
+	#get the date from the user 
+	start_date = request.GET.get('start_date')
+	end_date = request.GET.get('end_date')
+
+	# broilers_marsh,chick_marsh,old_pig,growers_marsh,layers_marsh ,young_pig 
+
+	# run a query to get all the supplies on that date
+	r_m_prices = RawMaterialPrices.objects.filter(date__range=[start_date, end_date])
+
+	# print(type(supplies))
+     
+	# return render(request, "view_supply.html", context)
+	return render(request, "view_raw_material_prices.html", {'r_m_prices':r_m_prices})
+
+def update_raw_material_prices(request):
+	context_dict = {}
+
+	if 'id' in request.GET:
+		pk = request.GET['id']
+
+		print (pk)
+		clean_pk = pk.strip("/")
+		print (clean_pk)
+		product_prices = RawMaterialPrices.objects.get(id=clean_pk)
+		form = RawMaterialPricesForm(request.POST or None, instance=product_prices)
+    
+		if form.is_valid():			
+			form.save()
+			redirect('view_raw_material_prices.html')
+		context_dict["form"] = form
+
+	return render(request,"update_raw_material_prices.html",context=context_dict)
+
+
+

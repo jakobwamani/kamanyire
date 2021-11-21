@@ -1,5 +1,5 @@
 from django import forms
-from .models import RawMaterial , Product
+from .models import RawMaterial , Product ,ProductPrices , RawMaterialPrices
 from django.utils import timezone
 
 RAW_MATERIAL_CHOICES = (("maize_bran" , "maize_bran"),("cotton", "cotton")
@@ -126,3 +126,44 @@ class ProductForm(forms.ModelForm):
 		model = Product
 
 		fields = ["date","product","maize_bran","cotton","sun_flower","salt","layers_premix","general_purpose_premix","shells","meat_boaster","egg_boaster","fish"]
+
+
+class ProductPriceForm(forms.ModelForm):
+	YEARS= [x for x in range(2000,2030)]
+	date = forms.DateField(label='Date', widget=forms.SelectDateWidget(years=YEARS),initial=timezone.now())
+	broilers_marsh = forms.IntegerField(initial = 0)
+	chick_marsh = forms.IntegerField(initial = 0)
+	old_pig = forms.IntegerField(initial = 0)
+	growers_marsh = forms.IntegerField(initial = 0)
+	layers_marsh = forms.IntegerField(initial = 0)
+	young_pig = forms.IntegerField(initial = 0)
+
+	class Meta:
+		model = ProductPrices
+
+		fields = ["date","broilers_marsh","chick_marsh","old_pig","growers_marsh","layers_marsh","young_pig"]
+
+
+
+class RawMaterialPricesForm(forms.ModelForm):
+	# quantity_id = models.AutoField(primary_key=True)
+	YEARS= [x for x in range(2000,2030)]
+	date = forms.DateField(label='Date', widget=forms.SelectDateWidget(years=YEARS),initial=timezone.now())
+	# date = models.DateField()
+	maize_bran = forms.IntegerField(initial=0)
+	cotton = forms.IntegerField(initial=0)
+	sun_flower = forms.IntegerField(initial=0)
+	fish = forms.IntegerField(initial=0)
+	salt = forms.IntegerField(initial=0)
+	general_purpose_premix = forms.IntegerField(initial=0)
+	layers_premix = forms.IntegerField(initial=0)
+	shells = forms.IntegerField(initial=0)
+	meat_boaster = forms.IntegerField(initial=0)
+	egg_boaster = forms.IntegerField(initial=0)
+
+	class Meta:
+		model = RawMaterialPrices
+
+		fields = ["date","maize_bran","cotton","sun_flower","salt","layers_premix","general_purpose_premix","shells","meat_boaster","egg_boaster","fish"]
+
+

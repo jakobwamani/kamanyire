@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block title_block %}
+View Raw Material prices
+{% endblock %}
+
+{% block body_block %}
+<h1>View price</h1>
+    <form action="{% url 'view_raw_material_prices' %}" method="get">
+                <!-- <label>Childid</label>
+                <input name="child" type="text" required placeholder="Childid..."><br/><br/> -->
+                <label>From</label>
+                <input name="start_date" type="date" ><br/><br/>
+                <labe>To</labe>
+                <input name="end_date" type="date" ><br/><br/>
+                <input type="submit" name="submit" value="Search"/>                
+    </form>
+
+     <table style="border:1px">
+                    <ul>
+        <!-- maize_bran,cotton,sun_flower,fish,salt,general_purpose_premix,layers_premix ,shells 
+        meat_boaster ,egg_boaster  -->
+                    <tr>
+                        <th>price Id</th>
+                        <th>Date</th>
+                        <th>Maize_bran</th>
+                        <th>Cotton</th>
+                        <th>Sun_Flower</th>
+                        <th>Fish</th>
+                        <th>Salt</th>
+                        <th>General Purpose_Premix</th>
+                        <th>Layers_Premix</th>
+                        <th>Shells</th>
+                        <th>Meat Boaster</th>
+                        <th>Egg Boaster</th>
+                        <!-- <th>Cost of Supply</th> -->
+                       <!--  <th>Total</th>
+                        <th>Cost of Supply</th>
+                        <th>Pricing</th> -->
+                        <th>Update</th>
+                        <th>Delete</th>
+                       
+                    </tr>
+                    {% for price in r_m_prices %}
+                    <tr>
+                        <td>{{ price.id}} </td>
+                        <td>{{ price.date }} </td>
+                        <td>{{ price.maize_bran }}</td>
+                        <td>{{ price.cotton }}</td>
+                        <td>{{ price.sun_flower }}</td>
+                        <td>{{ price.fish }}</td>
+                        <td>{{ price.salt }}</td>                      
+                        <td>{{ price.general_purpose_premix }} </td>
+                        <td>{{ price.layers_premix }} </td>
+                        <td>{{ price.shells }} </td>
+                        <td>{{ price.meat_boaster }} </td>
+                        <td>{{ price.egg_boaster }}</td>
+                        <!-- <td>{{ price.cost_of_supply}}</td> -->
+                        <!--I dnot know why i had to back reference it , it just couldn't work with it -->
+                        <td><a href="../update_raw_material_prices/?id={{ price.id }}">Update</a></td>
+                        <td><a href="../delete_price/?id={{ price.id }}">Delete</a></td>
+
+                    </tr>
+                    {% endfor %}
+                
+                </table>
+       
+{% endblock %}
+
+
+
+

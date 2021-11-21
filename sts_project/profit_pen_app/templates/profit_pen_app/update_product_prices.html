@@ -1,0 +1,24 @@
+
+{% extends 'base.html' %}
+
+{% block title_block %}
+Update Product Prices
+{% endblock %}
+
+{% block body_block %}
+<!DOCTYPE html>
+
+<body>
+	<h1>Update the product prices</h1>
+ <form method="POST"> 
+                <!-- Security token by Django -->
+                {% csrf_token %} 
+        
+                <!-- form as paragraph -->
+                {{ form.as_p }} 
+        
+                <input type="submit" value="Update"> 
+            </form> 
+
+</body>
+{% endblock %}
