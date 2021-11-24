@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% block title_block %}
+View Product Prices
+{% endblock %}
+
+{% block body_block %}
+<h1>View Product Prices</h1>
+    
+
+     <table style="border:1px">
+                    <ul>
+        <!-- maize_bran,cotton,sun_flower,fish,salt,general_purpose_premix,layers_premix ,shells 
+        meat_boaster ,egg_boaster  -->
+            <!-- broilers_marsh,chick_marsh,old_pig,growers_marsh,layers_marsh ,young_pig -->
+
+                    <tr>
+                        <th>Product Id</th>
+                        <th>Date</th>
+                        <th>broilers_marsh</th>
+                        <th>chick_marsh</th>
+                        <th>old_pig</th>
+                        <th>growers_marsh</th>
+                        <th>layers_marsh</th>
+                        <th>young_pig</th>
+                        <!-- <th>Cost of Supply</th> -->
+                       <!--  <th>Total</th>
+                        <th>Cost of Supply</th>
+                        <th>Pricing</th> -->
+                       <!--  <th>Update</th>
+                        <th>Delete</th> -->
+                       
+                    </tr>
+                
+                    <tr>
+                        <td>{{ l_p_p.id}} </td>
+                        <td>{{ l_p_p.date }} </td>
+                        <td>{{ l_p_p.broilers_marsh }}</td>
+                        <td>{{ l_p_p.chick_marsh }}</td>
+                        <td>{{ l_p_p.old_pig }}</td>
+                        <td>{{ l_p_p.growers_marsh }}</td>
+                        <td>{{ l_p_p.layers_marsh }}</td>                      
+                        <td>{{ l_p_p.young_pig }} </td>
+                        <!-- <td>{{ product.layers_premix }} </td>
+                        <td>{{ product.shells }} </td>
+                        <td>{{ product.meat_boaster }} </td>
+                        <td>{{ product.egg_boaster }}</td> -->
+                        <!-- <td>{{ product.cost_of_supply}}</td> -->
+                        <!--I dnot know why i had to back reference it , it just couldn't work with it -->
+                        <!-- <td><a href="../update_product_prices/?id={{ price.id }}">Update</a></td>
+                        <td><a href="../delete_product_prices/?id={{ price.id }}">Delete</a></td>
+ -->
+                    </tr>
+                    
+                
+                </table>
+
+<form method="POST" enctype="multipart/form-data">
+    <!-- Security token  Make sure you put this immediately after the form tag-->
+    {% csrf_token %}
+    <p>Raw Material Prices</p>
+            
+            <h1>Product Sales</h1>
+            
+     <!-- Using the formset -->
+    {{ form.as_p }}
+    
+    <input type="submit" value="Submit"> 
+</form>
+       
+{% endblock %}
+
+
+
+
+

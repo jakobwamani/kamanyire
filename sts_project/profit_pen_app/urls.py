@@ -20,4 +20,7 @@ urlpatterns = [
     path('create_raw_material_prices/',views.create_raw_material_prices, name = "create_raw_material_prices"),
     path('view_raw_material_prices/',views.view_raw_material_prices, name = "view_raw_material_prices"), 
     path('update_raw_material_prices/',views.update_raw_material_prices, name = "update_raw_material_prices"),
+    path('delete_raw_material_prices/',views.deleting_raw_material_prices, name = "delete_raw_material_prices"),
+    path('view_product_catalog',views.viewing_product_catalog, name = "view_product_catalog"),
+    path('view_raw_material_catalog',views.viewing_raw_material_catalog, name = "view_raw_material_catalog"),
 ]

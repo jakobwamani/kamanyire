@@ -46,7 +46,6 @@ class Product(models.Model):
 		return '{}'.format(self.product)
 
 class RawMaterialQuantities(models.Model):
-	quantity_id = models.AutoField(primary_key=True)
 	date = models.DateField()
 	maize_bran = models.IntegerField(default=0)
 	cotton = models.IntegerField(default=0)
@@ -87,7 +86,6 @@ class ProductPrices(models.Model):
 
 
 class RawMaterialPrices(models.Model):
-	# quantity_id = models.AutoField(primary_key=True)
 	date = models.DateField()
 	maize_bran = models.IntegerField(default=0)
 	cotton = models.IntegerField(default=0)
@@ -103,4 +101,26 @@ class RawMaterialPrices(models.Model):
 	def __str__(self):
 		return '{}'.format(self.date)
 
+
+class ProductSales(models.Model):
+	date = models.DateField()
+	product = models.CharField(max_length = 50)
+	quantity = models.IntegerField()
+	selling_price = models.IntegerField()
+	total = models.IntegerField()
+
+	def __str__(self):
+		return '{}'.format(self.date)
+
+
+
+class RawMaterialSales(models.Model):
+	date = models.DateField()
+	raw_material = models.CharField(max_length = 50)
+	quantity = models.IntegerField()
+	selling_price = models.IntegerField()
+	total = models.IntegerField()
+
+	def __str__(self):
+		return '{}'.format(self.date)
 

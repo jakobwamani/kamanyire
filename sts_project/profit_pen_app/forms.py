@@ -1,5 +1,5 @@
 from django import forms
-from .models import RawMaterial , Product ,ProductPrices , RawMaterialPrices
+from .models import RawMaterial , Product ,ProductPrices ,RawMaterialSales, RawMaterialPrices , ProductSales
 from django.utils import timezone
 
 RAW_MATERIAL_CHOICES = (("maize_bran" , "maize_bran"),("cotton", "cotton")
@@ -167,3 +167,40 @@ class RawMaterialPricesForm(forms.ModelForm):
 		fields = ["date","maize_bran","cotton","sun_flower","salt","layers_premix","general_purpose_premix","shells","meat_boaster","egg_boaster","fish"]
 
 
+PRODUCT_CHOICES = (("broilers_marsh","broilers_marsh")
+,("chick_marsh","chick_marsh")
+,("growers_marsh","growers_marsh")
+,("old_pig","old_pig")
+,("layers_marsh","layers_marsh")
+,("young_pig","young_pig"))
+class ProductSalesForm(forms.ModelForm):
+	YEARS= [x for x in range(2000,2030)]
+	date = forms.DateField(label='Date', widget=forms.SelectDateWidget(years=YEARS),initial=timezone.now())
+	# date = models.DateField()
+	product = forms.ChoiceField(choices = PRODUCT_CHOICES)
+	quantity = forms.IntegerField()
+	selling_price = forms.IntegerField()
+	total = forms.IntegerField()
+
+	class Meta:
+		model = ProductSales
+
+		fields = ["date","product","quantity","selling_price"]
+
+class RawMaterialSalesForm(forms.ModelForm):
+	YEARS= [x for x in range(2000,2030)]
+	date = forms.DateField(label='Date', widget=forms.SelectDateWidget(years=YEARS),initial=timezone.now())
+	raw_material = forms.ChoiceField(choices=RAW_MATERIAL_CHOICES)
+	quantity = forms.IntegerField()
+	selling_price = forms.IntegerField()
+	total = forms.IntegerField()
+
+	class Meta:
+		model = RawMaterialSales
+
+		fields = ["date","raw_material","quantity","selling_price"]
+	
+
+
+
+	

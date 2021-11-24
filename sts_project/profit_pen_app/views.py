@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from profit_pen_app.models import RawMaterial,Product,RawMaterialQuantities, ProductQuantities , ProductPrices , RawMaterialPrices
-from profit_pen_app.forms  import RawMaterialForm ,ProductForm ,RawMaterialPricesForm, SupplyForm , ProductPriceForm
+from profit_pen_app.models import RawMaterial,Product,RawMaterialQuantities, ProductQuantities , ProductPrices , RawMaterialPrices , ProductSales
+from profit_pen_app.forms  import RawMaterialForm ,ProductForm ,RawMaterialSalesForm,RawMaterialPricesForm, SupplyForm , ProductPriceForm , ProductSalesForm
 from django.http import HttpResponse
 from django.shortcuts import redirect
 from profit_pen_app.helper_functions import * 
@@ -88,6 +88,38 @@ def index(request):
 									old_pig = dup_old_pig , growers_marsh = dup_growers_marsh,layers_marsh = dup_layers_marsh , young_pig = dup_young_pig)
 	else:
 		print("Why can't just be free , from the ways of this world")
+
+	last_rm_quantity = RawMaterialPrices.objects.last()
+	#check if it has any instances , if not then just skip to the end
+	count_rm = RawMaterialPrices.objects.count()
+	if(count_rm != 0):
+		#change dates into some specific dates (%x-Local version of date-12/31/18)
+		last_date = last_rm_quantity.date
+		rear_date = last_date.strftime("%x")
+		current_date = datetime.datetime.now()
+		earlist_date = current_date.strftime("%x")
+		if rear_date == earlist_date:
+		    print("Dates are equal")
+		else:
+			#duplicate the last instance
+			dup_maize_bran = lastitem.maize_bran 
+			dup_cotton = lastitem.cotton
+			dup_sun_flower = lastitem.sun_flower
+			dup_fish = lastitem.fish
+			dup_salt = lastitem.salt
+			dup_general_purpose_premix = lastitem.general_purpose_premix
+			dup_layers_premix = lastitem.layers_premix
+			dup_shells = lastitem.shells
+			dup_meat_boaster = lastitem.meat_boaster
+			dup_egg_boaster=lastitem.egg_boaster
+			duplicate_quantiites = RawMaterialPrices.objects.create(date = datetime.datetime.now(),maize_bran = dup_maize_bran ,cotton = dup_cotton,
+	                                                               sun_flower = dup_sun_flower, fish = dup_fish,salt = dup_salt ,
+	                                                               general_purpose_premix = dup_general_purpose_premix,layers_premix = dup_layers_premix,
+	                                                               shells = dup_shells, meat_boaster = dup_meat_boaster,egg_boaster=dup_egg_boaster)
+	else:
+		print("Just continue with life")
+	
+
 
 
 	return HttpResponse("Hello, world. Welcome to the profitpen system.")
@@ -880,6 +912,81 @@ def update_raw_material_prices(request):
 		context_dict["form"] = form
 
 	return render(request,"update_raw_material_prices.html",context=context_dict)
+
+def deleting_raw_material_prices(request):
+	 # book= get_object_or_404(Book, pk=pk)  
+    context_dict = {}
+    if 'id' in request.GET:
+        pk = request.GET['id']
+        clean_pk = pk.strip("/")
+        cleaned_pk = int(clean_pk)
+        product_price_to_delete = RawMaterialPrices.objects.get(id=cleaned_pk) 
+        #But before we delete , we must reduce on the amount in the RMQ model
+        #since this is an object , i will create a function right away
+        
+        product_price_to_delete.delete()
+        # redirect('view_product_prices.html')
+        # if request.method =='POST':
+        # 	#we get to know the item 
+
+        #     supply_record_to_delete.delete()
+        #     return redirect('view_supply.html')
+
+        # context_dict["object"] = supply_record_to_delete
+    return render(request, "delete_raw_material_prices.html",context=context_dict)
+
+def viewing_product_catalog(request):
+	#get the date from the user 
+	start_date = request.GET.get('start_date')
+	end_date = request.GET.get('end_date')
+
+	# broilers_marsh,chick_marsh,old_pig,growers_marsh,layers_marsh ,young_pig 
+
+	# run a query to get all the supplies on that date
+	p_q = ProductQuantities.objects.filter(date__range=[start_date, end_date])
+
+	l_p_q = ProductQuantities.objects.last()
+
+	l_p_p = ProductPrices.objects.last()
+
+	context = {}
+	# add the dictionary during initialization
+	form = ProductSalesForm(request.POST or None)
+	if form.is_valid():
+		
+		form.save()
+		
+	context['form'] = form
+
+	return render(request, "view_product_catalog.html", {'p_q':p_q,'l_p_q':l_p_q,'l_p_p':l_p_p ,'form':form})
+
+def viewing_raw_material_catalog(request):
+	#get the date from the user 
+	# broilers_marsh,chick_marsh,old_pig,growers_marsh,layers_marsh ,young_pig 
+
+	# run a query to get all the supplies on that date
+
+	r_m_q = RawMaterialQuantities.objects.last()
+
+	r_m_p = RawMaterialPrices.objects.last()
+
+	context = {}
+	# add the dictionary during initialization
+	form = RawMaterialSalesForm(request.POST or None)
+	if form.is_valid():
+		
+		form.save()
+		
+	context['form'] = form
+
+	return render(request, "view_raw_material_catalog.html", {'r_m_q':r_m_q,'r_m_p':r_m_p ,'form':form})
+
+
+
+
+
+
+	
 
 
 
