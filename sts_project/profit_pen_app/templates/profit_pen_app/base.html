@@ -21,7 +21,18 @@
             {% block title_block %}
                 Profit Pen System
             {% endblock %}
-        </title>              
+        </title>      
+
+        <script type="text/javascript">
+            function multi(value) {
+                var x,y ;
+                x = 2 * value ;
+                y = 2 * value ;
+
+                document.getElementById("id_total").value = x;
+            }
+
+        </script>        
     </head>
     {% block body_block %}
     <body>
@@ -50,6 +61,16 @@
 
             
         </div>
+         <!-- <script type="text/javascript">
+        function autofill(){
+            var x = document.getElementById('id_quantity').value;
+            var y = document.getElementById('id_selling_price').value
+            if(x > 0 )
+            {
+                document.getElementById('id_total').value= x ;
+            }
+}
+    </script> -->
 </html>
     
 

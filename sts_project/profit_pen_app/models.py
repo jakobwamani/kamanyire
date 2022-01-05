@@ -84,7 +84,6 @@ class ProductPrices(models.Model):
 	def __str__(self):
 		return '{}'.format(self.date)
 
-
 class RawMaterialPrices(models.Model):
 	date = models.DateField()
 	maize_bran = models.IntegerField(default=0)
@@ -101,7 +100,6 @@ class RawMaterialPrices(models.Model):
 	def __str__(self):
 		return '{}'.format(self.date)
 
-
 class ProductSales(models.Model):
 	date = models.DateField()
 	product = models.CharField(max_length = 50)
@@ -111,8 +109,6 @@ class ProductSales(models.Model):
 
 	def __str__(self):
 		return '{}'.format(self.date)
-
-
 
 class RawMaterialSales(models.Model):
 	date = models.DateField()

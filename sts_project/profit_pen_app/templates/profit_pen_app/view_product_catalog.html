@@ -1,76 +1,127 @@
-{% extends 'base.html' %}
 
-{% block title_block %}
-View Product Prices
-{% endblock %}
-
-{% block body_block %}
-<h1>View Product Prices</h1>
-    
+<html>
+<head>
+    <title>Viewing_Raw_Materials</title>
+    <script type="text/javascript">
+        function autofill(value){
+            var x, y;
+             x = value;
+             // x = document.getElementById('id_quantity').value;
+             y = document.getElementById('id_selling_price').value;
+            if(x > 0 )
+            {
+            document.getElementById('id_total').value = x * y ;
+            }
+                            }
+    </script>
+       
+</head>
+<body>
+    <h1>View price</h1>
+   
 
      <table style="border:1px">
                     <ul>
         <!-- maize_bran,cotton,sun_flower,fish,salt,general_purpose_premix,layers_premix ,shells 
         meat_boaster ,egg_boaster  -->
-            <!-- broilers_marsh,chick_marsh,old_pig,growers_marsh,layers_marsh ,young_pig -->
-
                     <tr>
-                        <th>Product Id</th>
+                        <th>price Id</th>
                         <th>Date</th>
-                        <th>broilers_marsh</th>
-                        <th>chick_marsh</th>
-                        <th>old_pig</th>
-                        <th>growers_marsh</th>
+                        <th>Broilers_marsh</th>
+                        <th>Chick_marsh</th>
+                        <th>Growers_marsh</th>
+                        <th>Old_pig</th>
                         <th>layers_marsh</th>
                         <th>young_pig</th>
+                        <!-- <th>general_purpose_premix</th>
+                        <th>Shells</th>
+                        <th>Meat Boaster </th>
+                        <th>Egg Boaster</th> -->
                         <!-- <th>Cost of Supply</th> -->
                        <!--  <th>Total</th>
                         <th>Cost of Supply</th>
-                        <th>Pricing</th> -->
-                       <!--  <th>Update</th>
-                        <th>Delete</th> -->
-                       
+                        <th>Pricing</th> -->   
                     </tr>
-                
+                 
                     <tr>
                         <td>{{ l_p_p.id}} </td>
                         <td>{{ l_p_p.date }} </td>
                         <td>{{ l_p_p.broilers_marsh }}</td>
                         <td>{{ l_p_p.chick_marsh }}</td>
-                        <td>{{ l_p_p.old_pig }}</td>
                         <td>{{ l_p_p.growers_marsh }}</td>
+                        <td>{{ l_p_p.old_pig }}</td>
                         <td>{{ l_p_p.layers_marsh }}</td>                      
                         <td>{{ l_p_p.young_pig }} </td>
-                        <!-- <td>{{ product.layers_premix }} </td>
-                        <td>{{ product.shells }} </td>
-                        <td>{{ product.meat_boaster }} </td>
-                        <td>{{ product.egg_boaster }}</td> -->
-                        <!-- <td>{{ product.cost_of_supply}}</td> -->
-                        <!--I dnot know why i had to back reference it , it just couldn't work with it -->
-                        <!-- <td><a href="../update_product_prices/?id={{ price.id }}">Update</a></td>
-                        <td><a href="../delete_product_prices/?id={{ price.id }}">Delete</a></td>
- -->
+                        <!-- <td>{{ l_p_p.general_purpose_premix }} </td>
+                        <td>{{ l_p_p.shells }} </td>
+                        <td>{{ l_l_p.meat_boaster }} </td>
+                        <td>{{ l_l_p.egg_boaster }}</td>       -->
                     </tr>
-                    
-                
+                               
                 </table>
 
-<form method="POST" enctype="multipart/form-data">
+<form method="POST" enctype="multipart/form-data" autocomplete="on">
     <!-- Security token  Make sure you put this immediately after the form tag-->
     {% csrf_token %}
-    <p>Raw Material Prices</p>
-            
-            <h1>Product Sales</h1>
+    <p>Product Sales</p>            
+    <h1>Product  Sales</h1>
             
      <!-- Using the formset -->
-    {{ form.as_p }}
+    <label>Date</label>
+    <input id="id_date" type="date"> <br/>
+    <label>Item</label>
+    <select name="product" id="id_product">
+    <!--     maize_bran,cotton,sun_flower,fish,salt,layers_premix,general_purpose_premix
+   # ,shells,meat_boaster,meat_boaster,egg_boaster,egg_boaster -->
+      <option value="broilers_marsh">broilers_marsh</option>
+      <option value="chick_marsh">chick_marsh</option>
+      <option value="sun_flower">growers_marsh</option>
+      <option value="old_pig">old_pig</option>
+      <option value="salt">layers_marsh</option>
+      <option value="young_pig">young_pig</option>
+      <option value="general_purpose_premix">general_purpose_premix</option>
+      <option value="shells">shells</option>
+      <option value="meat_boaster">meat_boaster</option>
+      <option value="egg_boaster">egg_boaster</option>
+    </select> <br/>
+
+
+    <label>Selling Price</label>
+    <input id="id_selling_price" type="number" onchange="autofill()"> <br/>
+    <label>Quantity</label>
+    <input id="id_quantity" type="number"  onkeyup="autofill(this.value);" ><br/>
     
+    <label>Total</label>
+
+    <!-- <p id='id_total'></p> -->
+    <input id ="id_total" type="number">
+    <!-- <input type="id_total" type="number"  onclick="document.innerHTML(document.getElementById('id_quantity').value + document.getElementById('id_selling_price').value)"> <br/>
+ -->
+    <!-- <p id="demo"></p> -->
+
+    <script>
+    document.getElementById("id_total").innerHTML = document.getElementById('id_quantity').value + document.getElementById('id_selling_price').value;
+    </script>
+   
     <input type="submit" value="Submit"> 
 </form>
-       
-{% endblock %}
+
+</body>
+<div>
+            <a href="{% url 'get_supply' %}"><p>Get supplies</p></a><br/>
+            <a href="{% url 'view_supplies' %}"><p>View supplies</p></a><br/>
+            <a href="{% url 'create_products' %}"><p>Create_product</p></a><br/>
+            <a href="{% url 'view_products' %}"><p>View_product</p></a><br/>
+            <a href="{% url 'create_product_prices' %}"><p>Product_Prices</p></a><br/>
+            <a href="{% url 'view_product_prices' %}"><p>View_Product_Prices</p></a><br/>
+            <a href="{% url 'create_raw_material_prices' %}"><p>Raw_Material_Prices</p></a><br/>
+            <a href="{% url 'view_raw_material_prices' %}"><p>View_Raw_Material_Prices</p></a><br/>
+            <a href="{% url 'view_product_catalog' %}"><p>View_Product_Catalog</p></a><br/>
+            <a href="{% url 'view_raw_material_catalog' %}"><p>View_Raw_Material_Catalog</p></a><br/>
+</div>
 
 
+</html>
 
 
 

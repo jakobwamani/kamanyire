@@ -1,13 +1,24 @@
-{% extends 'base.html' %}
 
-{% block title_block %}
-View Raw Material prices
-{% endblock %}
-
-{% block body_block %}
-<h1>View price</h1>
+<html>
+<head>
+    <title>Viewing_Raw_Materials</title>
+    <script type="text/javascript">
+        function autofill(value){
+            var x, y;
+             x = value;
+             // x = document.getElementById('id_quantity').value;
+             y = document.getElementById('id_selling_price').value;
+            if(x > 0 )
+            {
+            document.getElementById('id_total').value = x * y ;
+            }
+                            }
+    </script>
+       
+</head>
+<body>
+    <h1>View price</h1>
    
-
      <table style="border:1px">
                     <ul>
         <!-- maize_bran,cotton,sun_flower,fish,salt,general_purpose_premix,layers_premix ,shells 
@@ -28,9 +39,7 @@ View Raw Material prices
                         <!-- <th>Cost of Supply</th> -->
                        <!--  <th>Total</th>
                         <th>Cost of Supply</th>
-                        <th>Pricing</th> -->
-                    
-                       
+                        <th>Pricing</th> -->   
                     </tr>
                  
                     <tr>
@@ -45,15 +54,12 @@ View Raw Material prices
                         <td>{{ r_m_p.layers_premix }} </td>
                         <td>{{ r_m_p.shells }} </td>
                         <td>{{ r_m_p.meat_boaster }} </td>
-                        <td>{{ r_m_p.egg_boaster }}</td>
-                        
-
+                        <td>{{ r_m_p.egg_boaster }}</td>      
                     </tr>
-                 
-                
+                               
                 </table>
 
-<form method="POST" enctype="multipart/form-data">
+<form method="POST" enctype="multipart/form-data" autocomplete="on">
     <!-- Security token  Make sure you put this immediately after the form tag-->
     {% csrf_token %}
     <p>Raw Material Sales</p>
@@ -61,13 +67,63 @@ View Raw Material prices
     <h1>Raw Material Sales</h1>
             
      <!-- Using the formset -->
-    {{ form.as_p }}
+    <label>Date</label>
+    <input id="id_date" type="date"> <br/>
+    <label>Item</label>
+    <select name="raw_material" id="id_raw_material">
+    <!--     maize_bran,cotton,sun_flower,fish,salt,layers_premix,general_purpose_premix
+   # ,shells,meat_boaster,meat_boaster,egg_boaster,egg_boaster -->
+      <option value="maize_bran">maize_bran</option>
+      <option value="cotton">cotton</option>
+      <option value="sun_flower">sun_flower</option>
+      <option value="fish">fish</option>
+      <option value="salt">salt</option>
+      <option value="layers_premix">layers_premix</option>
+      <option value="general_purpose_premix">general_purpose_premix</option>
+      <option value="shells">shells</option>
+      <option value="meat_boaster">meat_boaster</option>
+      <option value="egg_boaster">egg_boaster</option>
+    </select> <br/>
+
+
+    <label>Selling Price</label>
+    <input id="id_selling_price" type="number" onchange="autofill()" > <br/>
+    <label>Quantity</label>
+    <input id="id_quantity" type="number"  onkeyup="autofill(this.value);" ><br/>
+    
+    <label>Total</label>
+
+    <!-- <p id='id_total'></p> -->
+    <input id ="id_total" type="number">
+    <!-- <input type="id_total" type="number"  onclick="document.innerHTML(document.getElementById('id_quantity').value + document.getElementById('id_selling_price').value)"> <br/>
+ -->
+    <!-- <p id="demo"></p> -->
+
+    <script>
+    document.getElementById("id_total").innerHTML = document.getElementById('id_quantity').value + document.getElementById('id_selling_price').value;
+    </script>
+
+    <br/>
     
     <input type="submit" value="Submit"> 
 </form>
-       
-{% endblock %}
 
+</body>
+<div>
+            <a href="{% url 'get_supply' %}"><p>Get supplies</p></a><br/>
+            <a href="{% url 'view_supplies' %}"><p>View supplies</p></a><br/>
+            <a href="{% url 'create_products' %}"><p>Create_product</p></a><br/>
+            <a href="{% url 'view_products' %}"><p>View_product</p></a><br/>
+            <a href="{% url 'create_product_prices' %}"><p>Product_Prices</p></a><br/>
+            <a href="{% url 'view_product_prices' %}"><p>View_Product_Prices</p></a><br/>
+            <a href="{% url 'create_raw_material_prices' %}"><p>Raw_Material_Prices</p></a><br/>
+            <a href="{% url 'view_raw_material_prices' %}"><p>View_Raw_Material_Prices</p></a><br/>
+            <a href="{% url 'view_product_catalog' %}"><p>View_Product_Catalog</p></a><br/>
+            <a href="{% url 'view_raw_material_catalog' %}"><p>View_Raw_Material_Catalog</p></a><br/>
+</div>
+
+
+</html>
 
 
 

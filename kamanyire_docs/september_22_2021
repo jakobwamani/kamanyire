@@ -1,0 +1,77 @@
+Python 3.8.10 (default, Jun  2 2021, 10:49:15) 
+[GCC 9.4.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> from profit_pen_app.models import RawMaterial,Product,RawMaterialQuantities
+>>> get_specific_values = RawMaterial.objects.filter('Calicum')
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+  File "/home/jay/venvs/tangibleai/lib/python3.8/site-packages/django/db/models/manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/home/jay/venvs/tangibleai/lib/python3.8/site-packages/django/db/models/query.py", line 941, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+  File "/home/jay/venvs/tangibleai/lib/python3.8/site-packages/django/db/models/query.py", line 961, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+  File "/home/jay/venvs/tangibleai/lib/python3.8/site-packages/django/db/models/query.py", line 968, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "/home/jay/venvs/tangibleai/lib/python3.8/site-packages/django/db/models/sql/query.py", line 1393, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+  File "/home/jay/venvs/tangibleai/lib/python3.8/site-packages/django/db/models/sql/query.py", line 1412, in _add_q
+    child_clause, needed_inner = self.build_filter(
+  File "/home/jay/venvs/tangibleai/lib/python3.8/site-packages/django/db/models/sql/query.py", line 1283, in build_filter
+    arg, value = filter_expr
+ValueError: too many values to unpack (expected 2)
+>>> get_specific_values = RawMaterial.objects.filter(item='Calicum')
+>>> print(get
+get_specific_values  getattr(             
+>>> print(get_specific_values)
+<QuerySet [<RawMaterial: 2021-08-03 Adyeeri Calicum 30 0>, <RawMaterial: 2021-08-09 Amos Calicum 120 0>]>
+>>> #change the queryset to the list
+>>> query_set_list = list(get_specific_values)
+>>> print(query_set_list)
+[<RawMaterial: 2021-08-03 Adyeeri Calicum 30 0>, <RawMaterial: 2021-08-09 Amos Calicum 120 0>]
+>>> #so here i get to also realise the i get the first element is the first one that was entered but , i dnot need the first
+>>> # i need the last element
+>>> print(query_set_list[-1])
+2021-08-09 Amos Calicum 120 0
+>>> # want to find out the data type that the list gives us 
+>>> check_data_type = query_set_list[-1]
+>>> print(type(check_data_type))
+<class 'profit_pen_app.models.RawMaterial'>
+>>> #this means that its an object
+>>> print(check_data_type.item)
+Calicum
+>>> print(check_data_type.quantity)
+30
+>>> print(query_set_list[-1].quantity)
+30
+>>> print(query_set_list[-1])
+2021-08-09 Amos Calicum 120 0
+>>> answer = query_set_list[-1]
+>>> print(an
+and     answer  any(    
+>>> print(answer)
+2021-08-09 Amos Calicum 120 0
+>>> print(answer.quantity)
+30
+>>> print(answer.-quantity)
+  File "<console>", line 1
+    print(answer.-quantity)
+                 ^
+SyntaxError: invalid syntax
+>>> print(query_set_list[:])
+[<RawMaterial: 2021-08-03 Adyeeri Calicum 30 0>, <RawMaterial: 2021-08-09 Amos Calicum 120 0>]
+>>> print(query_set_list[:-1])
+[<RawMaterial: 2021-08-03 Adyeeri Calicum 30 0>]
+>>> print(query_set_list[1:])
+[<RawMaterial: 2021-08-09 Amos Calicum 120 0>]
+>>> last_element = query_set_list[1:]
+>>> print(last_element)
+[<RawMaterial: 2021-08-09 Amos Calicum 120 0>]
+>>> print(last_element[0])
+2021-08-09 Amos Calicum 120 0
+>>> print(last_element[0].quantity)
+30
+>>> 
+
+

@@ -185,7 +185,7 @@ class ProductSalesForm(forms.ModelForm):
 	class Meta:
 		model = ProductSales
 
-		fields = ["date","product","quantity","selling_price"]
+		fields = ["date","product","quantity","selling_price","total"]
 
 class RawMaterialSalesForm(forms.ModelForm):
 	YEARS= [x for x in range(2000,2030)]
@@ -198,7 +198,7 @@ class RawMaterialSalesForm(forms.ModelForm):
 	class Meta:
 		model = RawMaterialSales
 
-		fields = ["date","raw_material","quantity","selling_price"]
+		fields = ["date","raw_material","quantity","selling_price","total"]
 	
 
 

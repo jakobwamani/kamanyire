@@ -227,7 +227,11 @@ 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
 
 October 23rd 2021
 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
+
+November 21 2021
+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
 References
+
 DJANGO CRUD
 https://www.geeksforgeeks.org/django-crud-create-retrieve-update-delete-function-based-views/
 
@@ -355,6 +359,7 @@ Am thinking of it this way , like so
 -For saving raw material sales information 
 
 
+
 Am facing a challenge with Product quantities , so i think that they must updated whenever a creation of a 
 new day
 When a product mixture is updated and also when a product is mixture is deleted
@@ -366,6 +371,20 @@ Populating the productquantities table
 I have when ever a product is created some quantities are reduced inside the RMQ table
 but i can do that with the ProductQuantities table.
 Add those quantities together and then update the quantity of a certain product.
+
+
+November 18th 2021
+Am done with the retail product prices
+
+November 22nd 2021
+There will be a product sales model
+
+There will be a cart data structure
+
+
+### Auto fill a form
+https://www.youtube.com/watch?v=1UAORTlaqLg
+There will be a catalog display of the products
 
 # Contributors 
 

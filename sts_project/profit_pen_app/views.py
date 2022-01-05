@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from profit_pen_app.models import RawMaterial,Product,RawMaterialQuantities, ProductQuantities , ProductPrices , RawMaterialPrices , ProductSales
-from profit_pen_app.forms  import RawMaterialForm ,ProductForm ,RawMaterialSalesForm,RawMaterialPricesForm, SupplyForm , ProductPriceForm , ProductSalesForm
+from profit_pen_app.models import * 
+from profit_pen_app.forms  import * 
 from django.http import HttpResponse
 from django.shortcuts import redirect
 from profit_pen_app.helper_functions import * 
@@ -953,12 +953,23 @@ def viewing_product_catalog(request):
 	# add the dictionary during initialization
 	form = ProductSalesForm(request.POST or None)
 	if form.is_valid():
+		#So here it means that if am deduct the quantity that has been bought,
+		#i must do it for every raw material , that's what it means 
+		# Get to know the particular product from the form
+		product = form.cleaned_data['product']
+		quantity = form.cleaned_data['quantity']	
+		print("Hello we are now here")
+		product_sales_quantity_deduction(product,quantity)
 		
 		form.save()
 		
+	#Adding items to the dictionary
 	context['form'] = form
+	context['p_q'] = p_q
+	context['l_p_q'] = l_p_q
+	context['l_p_p'] = l_p_p
 
-	return render(request, "view_product_catalog.html", {'p_q':p_q,'l_p_q':l_p_q,'l_p_p':l_p_p ,'form':form})
+	return render(request, "view_product_catalog.html", context)
 
 def viewing_raw_material_catalog(request):
 	#get the date from the user 
@@ -974,12 +985,21 @@ def viewing_raw_material_catalog(request):
 	# add the dictionary during initialization
 	form = RawMaterialSalesForm(request.POST or None)
 	if form.is_valid():
-		
+		#So here it means that if am deduct the quantity that has been bought,
+		#i must do it for every raw material , that's what it means 
+		# raw_material = form.cleaned_data['raw_material']
+		# quantity = form.cleaned_data['quantity']
+		# raw_material_sales_quantity_deduction(raw_material,quantity)
 		form.save()
 		
 	context['form'] = form
+	# So am suggesting that after the sale has been saved , then we deduct the quantities 
+	last_sale = RawMaterialSales.objects.last()
+	#then throw the variables to the deduction function
+	raw_material_sales_quantity_deduction(last_sale.raw_material,last_sale.quantity)
 
-	return render(request, "view_raw_material_catalog.html", {'r_m_q':r_m_q,'r_m_p':r_m_p ,'form':form})
+
+	return render(request, "view_raw_material_catalog.html", {'r_m_q':r_m_q,'r_m_p':r_m_p ,'form':form ,})
 
 
 
